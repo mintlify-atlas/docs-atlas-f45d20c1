@@ -1,0 +1,74 @@
+---
+title: "Insert Captions for Figures, Tables, and Formulas"
+sidebarTitle: "Captions"
+description: "Automatically number and format captions for figures, tables, and formulas in your Parsanegar document following Persian academic caption conventions."
+---
+
+Parsanegar handles caption numbering for all three academic content types — figures (شکل), tables (جدول), and formulas (فرمول/معادله) — automatically applying the correct Persian-format numbering (e.g., شکل ۱-۱) and positioning conventions. You never need to manage caption numbers by hand; Parsanegar keeps them consistent as you add, remove, or rearrange content throughout your document.
+
+## Caption Types
+
+Parsanegar provides three dedicated caption buttons in the **عنوان‌ها و ارجاع** group on the Parsanegar ribbon tab.
+
+<CardGroup cols={3}>
+  <Card title="عنوان شکل" icon="image">
+    **btnInsertWriteCaptionForShape** — inserts a correctly formatted and numbered caption for figures, images, diagrams, and charts. Also manages figure sizing and alignment within the text area.
+  </Card>
+  <Card title="عنوان جدول" icon="table">
+    **btnInsertWriteCaptionForTable** — inserts a caption for tables. Captions are positioned above the table per Persian academic convention.
+  </Card>
+  <Card title="معادله‌نویسی" icon="function">
+    **btnInsertCaptionForFormula** — inserts and numbers mathematical equations so they can be referenced with cross-references later in the document.
+  </Card>
+</CardGroup>
+
+## Inserting a Caption
+
+<Steps>
+  <Step title="Position your cursor">
+    Click immediately before or after the figure, table, or formula where the caption should appear. For figures and tables, place the cursor in the dedicated caption line provided by the document template.
+  </Step>
+  <Step title="Click the appropriate caption button">
+    In the **عنوان‌ها و ارجاع** ribbon group, click **عنوان شکل**, **عنوان جدول**, or **معادله‌نویسی** depending on your content type.
+  </Step>
+  <Step title="Enter the caption text">
+    A dialog appears prompting you to type the descriptive caption text. The chapter-based sequence number is inserted automatically — you only supply the label.
+  </Step>
+  <Step title="Confirm">
+    Click **تأیید** (OK). Parsanegar inserts the fully formatted caption with the correct Persian numbering and paragraph style applied.
+  </Step>
+</Steps>
+
+<Tip>
+  Write caption text that is descriptive enough to stand on its own in the List of Figures (فهرست اشکال) or List of Tables (فهرست جداول). Readers often scan these lists before reading the full document, so a clear caption such as "نمودار مقایسه عملکرد دو الگوریتم در داده‌های آزمایشی" is far more useful than a vague label like "نمودار ۱".
+</Tip>
+
+## Caption Numbering Format
+
+Captions are numbered per chapter using the **Chapter-Number** format. For example:
+
+| Caption type | Example |
+|---|---|
+| Second figure in Chapter 1 | شکل ۱-۲ |
+| First table in Chapter 3 | جدول ۳-۱ |
+| Third formula in Chapter 2 | معادله ۲-۳ |
+
+Parsanegar uses Word's built-in `SEQ` field with chapter-level style references (`\s`) to maintain this numbering automatically. When you insert a new caption, all subsequent numbers in that chapter — and the corresponding List of Figures or List of Tables — update to reflect the new sequence.
+
+<Note>
+  After adding, deleting, or rearranging captions, run **بروزرسانی سند** (`Alt+R`) from the Parsanegar ribbon to refresh all caption numbers and the lists of figures and tables throughout the document. Caption numbers do not update in real time while editing.
+</Note>
+
+## Caption Settings
+
+Click the **dialog launcher** (the small arrow icon) at the bottom-right corner of the **عنوان‌ها و ارجاع** group to open the **تنظیمات عنوان و ارجاع** settings form (CaptionsReferSettingsForm). From here you can configure:
+
+- **کادر محاوره انتخاب عکس** — toggle whether a file-picker dialog appears automatically when you insert a shape caption, letting you choose an image at the same time.
+- **نسبت شکل حفظ شود** — lock the aspect ratio of figures when using the alignment tools.
+- **شکل‌ها به هم نچسبد** — prevent overlapping when aligning multiple figures.
+- **همترازی شکل با متن** — resize the selected figure (or all figures) to match the text area width.
+- **همترازی جدول با متن اصلی / فشرده‌سازی جدول** — resize tables to fit the page text area or compress them to fit their content.
+
+## Lists of Figures and Tables
+
+The Parsanegar document template includes pre-built **فهرست اشکال** (List of Figures) and **فهرست جداول** (List of Tables) pages. These lists are generated from the caption fields you insert using the caption buttons. Run **بروزرسانی سند** at any time to refresh these lists with the latest caption text and page numbers.

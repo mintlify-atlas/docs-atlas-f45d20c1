@@ -1,0 +1,91 @@
+---
+title: "Add, Remove, and Reorder Pages in a Parsanegar Document"
+sidebarTitle: "Managing Pages"
+description: "Control the structure of your Parsanegar document by adding, removing, and configuring sections using the page management panel."
+---
+
+Parsanegar documents are not flat Word files — they are composed of a series of content-controlled sections, one for each document part (cover page, abstract, chapters, sources, and so on). This structure guarantees that every section uses the correct page layout, header/footer, and numbering style defined by the university template. The **Add/Remove Pages** panel lets you change the section composition of an already-created document: enabling optional sections you skipped during creation, removing sections that are not relevant to your work, and adjusting the number of chapters.
+
+## Opening the Page Management Panel
+
+With a Parsanegar document open and active in Word, click **افزودن/حذف صفحات** (`btnAddRemovePages`) in the Parsanegar ribbon. The keyboard shortcut is **Alt + F3**. The panel reads the document's current section structure and displays every available section for your university template and document type, organized into two groups:
+
+- **Required pages** — sections that are mandatory for the selected document type; displayed with the toggle disabled.
+- **Optional pages** — sections that can be individually enabled or disabled; displayed with an active toggle switch.
+
+Chapters are managed separately with **Add Chapter** (`+`) and **Remove Chapter** (`−`) buttons.
+
+## Required vs Optional Pages
+
+Each sub-template in a university package is tagged as either required or optional based on two pieces of information encoded in the template manifest (`Templates.xml`):
+
+- **`requiredSubTemplates`** — lists the section IDs that must always be present for a given document type. The `defaultRequiredSubTemplates` list applies when no document-type-specific overrides are defined; a `customRequiredSubTemplate` entry can override the defaults for a specific type (e.g., Thesis vs. Dissertation).
+- **`notIncludeSubTemplates`** — lists section IDs that should not appear at all for a given document type, regardless of whether they exist in the template package.
+
+<Warning>
+  Required pages cannot be removed. Their toggle switches are permanently disabled in the panel. Attempting to work around this by directly editing the Word document will break the section structure and may corrupt cross-references, table of contents entries, and page numbering. Always use the panel to make structural changes.
+</Warning>
+
+Typical examples by document type:
+
+| Document type | Always required | Commonly optional |
+|---|---|---|
+| Thesis (پایان‌نامه) | Persian identity, Abstract, Table of contents, Chapter 1, Sources, English abstract | Dedication, Acknowledgment, Appendices, Glossary, Defense meeting |
+| Dissertation (رساله) | Persian identity, Abstract, Table of contents, Chapter 1, Sources, English identity | Preface, Endnotes, Glossary, Abbreviations |
+| Project (پروژه) | Persian identity, Table of contents, Chapter 1, Sources | Abstract, English abstract, Legal rights |
+| School Research (تحقیق درسی) | Persian identity, Chapter 1, Sources | Abstract, Dedication, Acknowledgment |
+
+## Page Order
+
+The order of sections in a Parsanegar document is fixed by the template's sub-template order numbers. When you enable an optional section, the add-in automatically determines the correct insertion point by finding the previous section in the template order that already exists in the document and inserting the new section immediately after it, with a correctly typed section break in between. You do not need to manually position sections — Parsanegar handles the ordering for you.
+
+Each section boundary is protected by a locked content control that stores the section's `PageID` (e.g., `_page_PersianAbstract`, `_page_Chapter2`). These markers allow the add-in to locate any section reliably regardless of how many pages of content it contains.
+
+## Removing Pages
+
+Removing an optional page deletes all Word sections occupied by that page (a single document section may span multiple Word sections due to the page layout), removes the associated section-break content control, and updates the `LastPage` marker on the preceding section so the document boundary is maintained correctly.
+
+<Warning>
+  Removing a page deletes all the content inside it permanently and cannot be undone after the changes are saved. If you need to keep the content, copy it to a separate file before removing the page.
+</Warning>
+
+## Adding and Removing Chapters
+
+Chapters are treated separately from other optional sections because multiple chapters of the same type can exist in a single document. The panel provides two buttons:
+
+- **افزودن فصل** (`btnAddChapter`) — adds the next available chapter (Chapter 2, Chapter 3, …) up to a maximum of 10 chapters (indices 0–9).
+- **حذف فصل** (`btnRemoveChapter`) — removes the most recently added chapter. The button is disabled when only one chapter remains; the Add button is disabled when 10 chapters are present.
+
+Each chapter card in the panel shows whether the chapter has already been created in the document (marked **ساخته شده**) or is new (marked **جدید**).
+
+## Add/Remove Workflow
+
+<Steps>
+
+  <Step title="Open a Parsanegar document in Word">
+    The document must be the active document in Microsoft Word. If no Parsanegar document is open, the `btnAddRemovePages` button is inactive.
+  </Step>
+
+  <Step title="Click 'افزودن/حذف صفحات' in the ribbon">
+    The panel reads the document's university, template type, and document type from the document's stored variables, then loads the full section list from the template manifest.
+  </Step>
+
+  <Step title="Toggle optional pages and adjust chapters">
+    Use the toggle switches next to each optional section to enable or disable it. Use the **+** and **−** buttons to add or remove chapters. Required pages show a disabled toggle with a tooltip explaining they cannot be changed.
+  </Step>
+
+  <Step title="Click 'تأیید تغییرات' (Confirm Changes)">
+    Parsanegar processes each changed section in order: insertions are performed before deletions, and chapters are adjusted last. A loading indicator shows the name of the section currently being processed.
+
+    After all structural changes are applied, Parsanegar re-populates the metadata content controls across the entire document (title, author, supervisor, university, etc.) to ensure any newly inserted sections are correctly filled in. It also reattaches the university `.dotm` template to refresh paragraph styles and page layout across all sections.
+  </Step>
+
+  <Step title="Wait for the save confirmation">
+    Once all changes are applied, the document is saved automatically to its existing path in the workspace. The panel then closes.
+  </Step>
+
+</Steps>
+
+<Note>
+  The document is saved automatically after confirming changes. You do not need to press Ctrl+S separately. However, if you close the panel without confirming, no changes are applied and the document is not modified.
+</Note>

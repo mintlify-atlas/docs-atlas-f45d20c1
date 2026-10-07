@@ -1,0 +1,110 @@
+---
+title: "Manage Citations and References in Parsanegar"
+sidebarTitle: "Citations"
+description: "Insert in-text citations, add sources manually or via BibTeX import, and switch between APA and IEEE citation styles in Parsanegar."
+---
+
+Parsanegar's citation manager handles the full reference workflow — from adding sources to inserting in-text citations and generating the bibliography section — with support for APA and IEEE styles. All citation tools live in the **مدیریت استنادهای علمی** group on the Parsanegar ribbon tab.
+
+## Full Citation Workflow
+
+<Steps>
+  <Step title="Add your sources">
+    Before inserting any citations, add your references to the document's source list. Use **افزودن دستی** to enter details manually, or **ورود خودکار** to import from a BibTeX file. See [Adding Sources](#adding-sources) below.
+  </Step>
+  <Step title="Insert in-text citations">
+    Position your cursor at the point in the document where the citation should appear. Click **استناد دهی** (`Alt+I`) to open the InsertCitation task pane, select the source, and click **درج منبع**. See [Inserting a Citation](#inserting-a-citation).
+  </Step>
+  <Step title="Verify the bibliography">
+    Click **فهرست منابع** (`Alt+G`) to jump to the bibliography section at the end of the document and confirm all citations appear correctly formatted. See the [Bibliography guide](/guides/bibliography) for more details.
+  </Step>
+</Steps>
+
+## Adding Sources
+
+Click the **افزودن منبع** gallery button in the **مدیریت استنادهای علمی** group to reveal two import methods.
+
+### افزودن دستی — Manual Entry
+
+Select **افزودن دستی** (`Alt+M`) to open Word's built-in source entry form. Fill in the fields for source type, title, authors, year, journal/publisher, and any other required metadata. Parsanegar saves the source to the document's bibliography store, making it available for citation insertion.
+
+### ورود خودکار — BibTeX Import
+
+Select **ورود خودکار** (`Alt+L`) to open the **AddBibliography** import dialog. This dialog accepts files in `.bib` format (BibTeX). You can:
+
+- Click the file selection area to browse for one or more `.bib` files
+- Drag and drop files directly onto the import panel
+
+Each loaded file is validated immediately. A green status indicator confirms that the file content is a recognized BibTeX structure; a red indicator means the file format could not be parsed. Only valid files are imported when you click **تأیید**.
+
+If a source in the imported file shares a tag (citation key) with an existing source in the document, Parsanegar asks whether to replace the existing entry.
+
+<Tip>
+  Google Scholar supports BibTeX export out of the box. Open any paper on scholar.google.com, click **Cite**, then choose **BibTeX** to download a `.bib` file you can import directly into Parsanegar. You can also export entire libraries from reference managers such as Zotero or Mendeley as `.bib` files.
+</Tip>
+
+## Inserting a Citation
+
+<Steps>
+  <Step title="Position your cursor">
+    Click in the document body at the exact location where the in-text citation should appear — usually immediately after the sentence or quote being cited.
+  </Step>
+  <Step title="Open the citation task pane">
+    Click **استناد دهی** in the **مدیریت استنادهای علمی** group, or press `Alt+I`. The InsertCitation task pane opens on the right side of Word.
+  </Step>
+  <Step title="Find your source">
+    Use the **جستجو** field to filter sources by title or author name. The list shows each source's title (عنوان), author(s) (نویسنده(ها)), and source type (نوع منبع).
+  </Step>
+  <Step title="Configure parentheses (optional)">
+    Toggle **ارجاع داخل پرانتز باشد** if you want the citation wrapped in parentheses. The **پیش‌نمایش** box shows the formatted output before insertion.
+  </Step>
+  <Step title="Insert">
+    Select the source in the list and click **درج منبع**, double-click the source, or press `Enter`. The citation field is inserted at the cursor and the bibliography section is updated automatically.
+  </Step>
+</Steps>
+
+<Note>
+  If no sources have been added to the document yet, the task pane shows a prompt with two quick-action buttons: **وارد کنید** (import from file) and **ایجاد کنید** (add manually). Use these to add your first source without closing the pane.
+</Note>
+
+## Citation Styles
+
+Use the **شیوه** gallery (سبک نمایش منابع) in the **مدیریت استنادهای علمی** group to switch between citation styles.
+
+<Tabs>
+  <Tab title="APA">
+    **APA** (American Psychological Association) uses an author-year format for in-text citations.
+
+    - In-text example: `(Rezaei, 2022)`
+    - Commonly used in humanities, social sciences, and psychology
+    - Bibliography entries list full author names, year, title, and journal or publisher
+
+    Select **APA** from the شیوه gallery (`__id48`) to apply this style.
+  </Tab>
+  <Tab title="IEEE">
+    **IEEE** (Institute of Electrical and Electronics Engineers) uses a numbered format for in-text citations.
+
+    - In-text example: `[1]`
+    - Commonly used in engineering, computer science, and applied sciences
+    - Bibliography entries are numbered and include full reference details
+
+    Select **IEEE** from the شیوه gallery (`__id49`) to apply this style.
+  </Tab>
+</Tabs>
+
+<Note>
+  Switching the citation style updates **all** existing in-text citations and the bibliography section at once. You do not need to manually edit any citations after changing the style — Parsanegar reformats them automatically using Word's bibliography field mechanism.
+</Note>
+
+## Managing Sources
+
+Click **مدیریت منابع** (`Alt+S`) to open the source manager (CitationSettingsForm). From this form you can:
+
+- Review all sources currently added to the document
+- Edit source details (title, authors, year, etc.)
+- Delete sources that are no longer needed
+- Change the global bibliography display style (سبک نمایش منابع) between APA and IEEE
+
+## Navigating to the Bibliography
+
+Click **فهرست منابع** (`Alt+G`) to scroll directly to the bibliography section (منابع) at the end of the document. This is useful for a quick visual check after adding or editing sources. For details on how the bibliography is formatted and maintained, see the [Bibliography guide](/guides/bibliography).

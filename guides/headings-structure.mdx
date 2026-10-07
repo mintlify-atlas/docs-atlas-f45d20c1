@@ -1,0 +1,59 @@
+---
+title: "Headings and Document Structure in Parsanegar"
+sidebarTitle: "Headings"
+description: "Apply Persian-formatted heading styles (H2–H5) to structure your academic document chapters and sections using the Parsanegar ribbon."
+---
+
+Parsanegar provides four heading levels — H2 through H5 — with pre-configured Persian styles that match your university template. Each level is mapped to a built-in Word heading style (`styleHeading2` through `styleHeading5`), which means chapter numbering, indentation, font size, and paragraph spacing are all applied automatically and consistently. You never need to manually bold a heading or adjust its size; selecting the correct level does everything at once.
+
+## Applying Headings
+
+<Steps>
+  <Step title="Position your cursor">
+    Place your cursor anywhere inside the paragraph you want to turn into a heading, or select multiple paragraphs to apply the same heading level to all of them at once.
+  </Step>
+  <Step title="Open the Heading menu">
+    In the **پارسانگار** ribbon tab, locate the **مدیریت متن** group and click the **عنوان‌بندی** menu button (`menu1`). A dropdown listing all four heading levels will appear.
+  </Step>
+  <Step title="Select the heading level">
+    Click the desired level:
+    - **عنوان سطح دو** (H2) — keyboard shortcut **Alt + 2**
+    - **عنوان سطح سه** (H3) — keyboard shortcut **Alt + 3**
+    - **عنوان سطح چهار** (H4) — keyboard shortcut **Alt + 4**
+    - **عنوان سطح پنج** (H5) — keyboard shortcut **Alt + 5**
+
+    Parsanegar calls `DedicatedFunctions.textFormating(selection, StyleNames.styleHeading2)` (or the corresponding level) to apply the style to the selected range.
+  </Step>
+  <Step title="Verify the result">
+    The paragraph text will reformat immediately — font, size, color, and paragraph spacing update to match the heading style defined in your template. The Word style name shown in the Home tab will change to **Heading 2**, **Heading 3**, etc.
+  </Step>
+</Steps>
+
+## Heading Hierarchy
+
+Parsanegar supports headings from level 2 to level 5. Level 1 is reserved for chapter titles, which are managed by the document structure and section breaks rather than by the heading button. The recommended hierarchy for Persian academic writing is:
+
+| Ribbon Button | Word Style | Recommended Use |
+|---|---|---|
+| عنوان سطح دو (H2) | `Heading 2` | Chapter title (فصل) |
+| عنوان سطح سه (H3) | `Heading 3` | Main section (بخش اصلی) |
+| عنوان سطح چهار (H4) | `Heading 4` | Subsection (زیربخش) |
+| عنوان سطح پنج (H5) | `Heading 5` | Sub-subsection (زیرزیربخش) |
+
+Maintaining this hierarchy is important because the table of contents (فهرست مطالب) and automatic outline numbering both derive their structure from heading levels. Skipping levels — going from H2 directly to H4 — will create gaps in the numbering scheme.
+
+## Table of Contents
+
+The document's table of contents is built from Word's heading styles. Parsanegar maps TOC levels 1–5 to the corresponding `styleTOC1` through `styleTOC5` built-in styles. When you add a new heading or rename an existing one, click **بروزرسانی سند** (`btnUpdateDocument`, keyboard shortcut **Alt + R**) to refresh all fields, including the TOC, cross-references, and caption lists, in a single operation.
+
+<Note>
+  Custom inline formatting applied directly to heading text — such as manually changing the font color or size — may conflict with the style definition and cause inconsistencies in TOC generation. Use the Format Settings dialog (dialog launcher on the **مدیریت متن** group) to modify the heading style itself instead.
+</Note>
+
+## Chapter Management
+
+Each chapter in a Parsanegar document corresponds to a protected Word section. Chapter titles and their sequence are tracked through content controls (`_field_Chapter1_Title` through `_field_Chapter10_Title`). After adding or reordering chapters, always use **بروزرسانی سند** to recalculate chapter numbers and regenerate the TOC. The **صفحه‌بندی** button (`btnAddRemovePages`, **Alt + F3**) provides a dedicated interface for adding, removing, and reordering chapters without breaking the document structure.
+
+<Tip>
+  Use heading styles consistently throughout the document instead of formatting text manually with bold or large font sizes. Style-based headings ensure the table of contents updates correctly and that any university-required formatting changes can be applied in one place rather than hunting through the entire document.
+</Tip>

@@ -1,0 +1,56 @@
+---
+title: "Generate a Defense Announcement with Parsanegar"
+sidebarTitle: "Defense Announcements"
+description: "Automatically generate a formatted thesis or dissertation defense announcement document using Parsanegar, pre-filled with your document metadata."
+---
+
+Parsanegar can generate a formatted defense announcement (اطلاعیه دفاع) for your thesis or dissertation. It reads the metadata stored in your document — title, student name, supervisors, advisors, academic degree, university, and defense date — and uses it to populate an official announcement template, saving you from re-entering the same information manually.
+
+<Tip>
+  Before generating the announcement, verify that all your document's metadata fields are up to date: open the document information panel and confirm that the title (عنوان)، author name (نگارنده)، supervisor and advisor names، academic degree، and defense date are all correct. Any errors in those fields will be carried directly into the announcement.
+</Tip>
+
+## Generating an Announcement
+
+In the Parsanegar ribbon, open the **ابزارها** (Tools) gallery and select **اطلاعیه دفاع** (Defense Announcement). The **DefenseAnnouncementsTaskPane** opens on the right side of the Word window and loads the list of available announcement templates.
+
+## Available Templates
+
+Parsanegar ships with a set of pre-built defense announcement templates sourced from the `DefenseAnnouncementsAccess` registry. Each template is shown in the task pane as a thumbnail preview alongside its name and source institution.
+
+Templates are available in `.docx` format. Choose the template that matches your university's official announcement style or the format requested by your faculty office.
+
+## Filling in Details
+
+<Steps>
+  <Step title="Select a template">
+    Browse the template list in the task pane. Click a template thumbnail to select it. The preview image helps you identify the correct layout before generating the document.
+  </Step>
+  <Step title="Enter the announcement-specific details">
+    Fill in the fields that are unique to this defense event:
+
+    - **تاریخ دفاع** — defense date (populated from document metadata; edit if needed)
+    - **مکان دفاع** — defense location / room
+    - **داوران** — examiner / jury member names
+
+    All other fields — title, author, supervisors, advisors, degree level, faculty, and university emblem — are filled automatically from your document's stored metadata.
+  </Step>
+  <Step title="Generate the announcement document">
+    Click **ایجاد** (Create). A Save dialog opens. Choose the destination folder and filename for the output `.docx` file.
+
+    Parsanegar copies the selected template to the chosen path, opens it as a separate Word document, and replaces every content control tag with the corresponding value — either from the form fields you entered (date, location, examiners) or from your main document's content controls (title, author, supervisors, etc.). The university emblem is automatically inserted and scaled to match the template's image placeholder.
+
+    The completed announcement document is saved and opened in Word for your review.
+  </Step>
+  <Step title="Review, save, and print">
+    Review the generated announcement for accuracy. Make any final corrections directly in the new document, then save and print it, or export it to PDF using Word's built-in export feature for digital distribution.
+  </Step>
+</Steps>
+
+## Saving and Distributing
+
+The generated announcement is a standard Word `.docx` file with all content controls replaced by plain text and images. It has no dependency on the Parsanegar add-in and can be shared with faculty offices, posted on notice boards, or sent by email exactly as produced.
+
+<Note>
+  The output file cannot overwrite your original Parsanegar document. If you accidentally choose the same path as your main document, Parsanegar will display an error and prompt you to choose a different filename.
+</Note>

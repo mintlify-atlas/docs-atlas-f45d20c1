@@ -1,0 +1,65 @@
+---
+title: "Generate and Format the Bibliography in Parsanegar"
+sidebarTitle: "Bibliography"
+description: "Automatically generate a formatted bibliography section in your Parsanegar document, updated to reflect your current citation sources and selected style."
+---
+
+Parsanegar automatically maintains the bibliography (کتابشناسی / منابع) section of your document based on the sources you have added to the citation manager. When you switch citation styles or add new sources, the bibliography updates accordingly — you do not need to build or sort the reference list by hand.
+
+## Accessing the Bibliography
+
+Click **فهرست منابع** (`Alt+G`) in the **مدیریت استنادهای علمی** ribbon group to scroll directly to the منابع section at the end of the document. This section is part of the Parsanegar document template and is populated by Word's built-in bibliography field, which Parsanegar keeps in sync whenever you insert or update citations.
+
+<Note>
+  Avoid editing the bibliography section text directly. The bibliography is generated from Word's citation field mechanism — any manual edits will be overwritten the next time **بروزرسانی سند** is run or a new citation is inserted. Make all source changes through **مدیریت منابع** or the citation manager instead.
+</Note>
+
+## Bibliography Styles
+
+The bibliography format mirrors the citation style selected in the **شیوه** gallery. Switching styles reformats both the in-text citations and the bibliography list simultaneously.
+
+<Tabs>
+  <Tab title="APA">
+    In APA style the bibliography is presented as an alphabetically sorted reference list. Each entry includes:
+
+    - Full author name(s)
+    - Year of publication
+    - Title of the work
+    - Journal name or publisher, volume, issue, and page numbers as applicable
+
+    **Example entry:**
+    ```
+    Rezaei, A. (2022). Deep learning for Persian text classification. Journal of AI Research, 15(3), 45–62.
+    ```
+  </Tab>
+  <Tab title="IEEE">
+    In IEEE style the bibliography is a numbered list ordered by the sequence in which sources are first cited in the document. Each entry includes:
+
+    - Author initials and last name
+    - Title of the work (in quotation marks for articles, italicised for books)
+    - Journal or conference name, volume, issue, page range, and year
+
+    **Example entry:**
+    ```
+    [1] A. Rezaei, "Deep learning for Persian text classification," J. AI Res., vol. 15, no. 3, pp. 45–62, 2022.
+    ```
+  </Tab>
+</Tabs>
+
+## Updating the Bibliography
+
+The bibliography updates automatically each time you insert a new in-text citation via the InsertCitation task pane. To force a full refresh after editing sources or switching styles, click **بروزرسانی سند** (`Alt+R`) in the Parsanegar ribbon. This command updates:
+
+- All in-text citation fields
+- The bibliography section
+- Caption numbers, cross-references, and the table of contents
+
+Run this command before generating a PDF or submitting your document to ensure everything is current.
+
+## Adding the Bibliography Page
+
+If your document does not yet include a bibliography page, use the **صفحه‌بندی** button (`Alt+F3`) — **حذف و اضافه صفحات** — to open the page management dialog. From there you can add the منابع page to your document. Once the page is present, Parsanegar's citation tools will populate and maintain it automatically.
+
+<Tip>
+  Before your final export, open **مدیریت منابع** (`Alt+S`) and verify that every source has all required fields filled in — authors, year, title, and journal or publisher. Incomplete sources may produce malformed bibliography entries or missing information in either APA or IEEE format. Catching missing fields early is faster than correcting formatted output after the fact.
+</Tip>

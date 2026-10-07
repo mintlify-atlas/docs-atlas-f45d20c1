@@ -1,0 +1,59 @@
+---
+title: "Insert and Manage Footnotes in Persian Academic Documents"
+sidebarTitle: "Footnotes"
+description: "Add Persian and English footnotes to your Parsanegar document with automatic numbering and formatting aligned to Iranian academic writing standards."
+---
+
+Parsanegar provides dedicated footnote insertion for both Persian and English footnotes, with separate formatting streams and proper text direction for each. Persian footnotes use right-to-left paragraph layout and are formatted to match your template's `styleFootnoteText` style. English footnotes use left-to-right layout with Arabic numerals, appropriate for citing English-language sources without disturbing the Persian numbering sequence. Both types are fully integrated with Word's built-in footnote engine, so they appear at the bottom of the page and are managed by Word as standard footnotes.
+
+## Inserting a Footnote
+
+<Steps>
+  <Step title="Position your cursor">
+    Place your cursor in the body text immediately after the word or phrase you want to annotate. Do not select text — the footnote marker is inserted at the cursor position.
+  </Step>
+  <Step title="Open the footnote gallery">
+    In the **پارسانگار** ribbon tab, locate the **پانویس** group and click the **درج پانویس (پاورقی)** gallery button (`galleryInsertFootnote`).
+  </Step>
+  <Step title="Choose the footnote language">
+    Select one of the two options:
+
+    - **فارسی** (`__id27`) — inserts a Persian footnote with right-to-left paragraph formatting and Persian keyboard language. Use this for Persian-language sources, explanations, and annotations. Keyboard shortcut: **Alt + =**
+    - **انگلیسی** (`__id28`) — inserts an English footnote with left-to-right paragraph formatting and English keyboard language. Use this when citing English-language books, journals, or websites. Keyboard shortcut: **Alt + -**
+  </Step>
+  <Step title="Type the footnote text">
+    The cursor jumps to the footnote area at the bottom of the page. Type your footnote text. The correct language, font, and paragraph direction are already set. Press **Ctrl + Alt + Home** or click in the body text to return to the main text area.
+  </Step>
+</Steps>
+
+<Note>
+  Persian footnotes and English footnotes are formatted differently at the paragraph level. Persian footnotes (`KeyboardLanguage.Persian`) set the text direction to RTL and apply the Persian font defined in your template. English footnotes (`KeyboardLanguage.English`) set the direction to LTR. Both use Word's standard footnote numbering system — there is a single sequential counter for all footnotes in the document, regardless of language. If you need to visually distinguish sources by language, use the Footnote Settings dialog to configure the number style.
+</Note>
+
+## Footnote Settings
+
+The **Footnote Settings** dialog (`SubtitleSettingsForm`) gives you fine-grained control over how footnotes appear throughout the document. Open it by clicking the **dialog launcher arrow** (▾) at the bottom-right corner of the **پانویس** group (`grpFootnotes__btn`, which calls `grpFootnotes_DialogLauncherClick → footnoteSettings()`).
+
+The dialog contains three configurable options, each saved as a document variable so settings travel with the file:
+
+<CardGroup cols={3}>
+  <Card title="سبک پانویس" icon="list-ol">
+    Controls the footnote column layout. Index 0 sets a single-column footnote area; index 1 sets a two-column layout (`FootnoteOptions.LayoutColumns`).
+  </Card>
+  <Card title="نوع خط جداکننده" icon="minus">
+    Controls the separator line between body text and footnotes. Options include the default Word separator, left-aligned, right-aligned, centered, and full-width (`Footnotes.Separator`). Right-aligned is the standard for Persian academic documents.
+  </Card>
+  <Card title="سبک اعداد پانویس" icon="hashtag">
+    Controls how footnote reference numbers are displayed in the text and at the footnote itself. Changing this setting applies the new number style to all existing footnotes in the document immediately.
+  </Card>
+</CardGroup>
+
+Changes made in the Footnote Settings dialog are applied live with undo support (Word's `UndoRecord` API) so you can press **Ctrl + Z** to revert any change.
+
+## Footnote Numbering
+
+By default, footnotes are numbered continuously throughout the document using Word's standard numbering engine. The numbering style (Arabic numerals, Persian letters, etc.) is configurable through the **سبک اعداد پانویس** setting described above. When you insert a new footnote between two existing ones, Word automatically renumbers all subsequent footnotes.
+
+<Tip>
+  For citing academic sources, Parsanegar also provides a full citation management system in the **مدیریت استنادهای علمی** group (APA and IEEE styles). Footnotes are best used for supplementary explanations, translator's notes, and references to primary sources that do not fit neatly into the bibliography. Use the citation manager for all bibliography-listed references so the فهرست منابع (bibliography) is generated automatically.
+</Tip>

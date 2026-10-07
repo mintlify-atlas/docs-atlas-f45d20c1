@@ -1,0 +1,155 @@
+---
+title: "Troubleshoot Parsanegar Add-in Issues in Microsoft Word"
+sidebarTitle: "Troubleshooting"
+description: "Diagnose and resolve common Parsanegar add-in issues including disabled controls, missing fonts, login errors, and document access problems."
+---
+
+Most Parsanegar issues fall into a few common categories: disabled ribbon controls, document access errors, font rendering problems, and server connectivity failures. This guide covers the most frequent problems reported by users and provides step-by-step resolution for each.
+
+<Note>
+  Before investigating further, check whether the Parsanegar add-in appears in Word's COM Add-ins list (**File → Options → Add-ins → COM Add-ins → Go**). If **ShivaNegar** is not listed or is unchecked, most features will be unavailable regardless of any other configuration.
+</Note>
+
+<Tip>
+  When contacting support about an error, include the error code shown in the dialog (e.g., `ErrorCodes.InternalStartup = 19`). This helps the support team identify the exact failure point quickly without additional back-and-forth.
+</Tip>
+
+## Common Issues
+
+<AccordionGroup>
+
+  <Accordion title="Ribbon controls are disabled or grayed out">
+    **Cause:** The active document is not located inside the configured workspace directory (`Documents\ShivaNegarWorkspace` by default). Parsanegar calls `hasAccess()` when a document is opened and returns `AccessDenied_NoHasAccessing` for documents outside the workspace, causing `Ribbon.RibbonControlsVisibility(false)` to be called.
+
+    **Resolution:**
+    1. Move the document file into your workspace directory (e.g., `C:\Users\<YourName>\Documents\ShivaNegarWorkspace\`).
+    2. Close and reopen the document in Word.
+    3. Alternatively, change the workspace directory in **Document Manager → تنظیمات** to match the folder where your documents are stored.
+    4. If you have an administrator account, ribbon controls are enabled regardless of document location.
+  </Accordion>
+
+  <Accordion title="'پارسانگار' tab does not appear in the Word ribbon">
+    **Cause:** The add-in is not loaded in Microsoft Word. This can occur if the installer was not completed, if Word disabled the add-in after a crash, or if the .NET Framework prerequisite is missing.
+
+    **Resolution:**
+    1. Open Word and go to **File → Options → Add-ins**.
+    2. At the bottom, set the **Manage** dropdown to **COM Add-ins** and click **Go**.
+    3. Look for **ShivaNegar** (or **پارسانگار**) in the list.
+       - If it is **unchecked**, check it and click **OK**. Restart Word.
+       - If it is **not in the list**, re-run the Parsanegar installer.
+       - If it appears with a **load error**, see the startup crash entry below.
+    4. Ensure **.NET Framework 4.8** is installed (see the missing .NET Framework entry below).
+  </Accordion>
+
+  <Accordion title="Font errors or missing Persian text (boxes/question marks)">
+    **Cause:** One or more required Persian fonts are not installed on the system. Parsanegar runs `checkingFonts()` on startup and prompts to install them, but they may have been removed or not installed correctly.
+
+    The required fonts are: **B Nazanin**, **B Zar**, **B Lotus**, **B Yagut**, **B Badr**, **B Titr**, **IranNastaliq**, **Vazirmatn**, **Besmellah 1–4**, and **Times New Roman**.
+
+    **Resolution:**
+    1. Reinstall the Parsanegar add-in. The installer bundles all required fonts as embedded TTF resources and installs them to the Windows Fonts directory.
+    2. After installation, **close Microsoft Word completely** and reopen it. Windows requires a full application restart to register newly installed fonts.
+    3. If the issue persists after reinstalling, manually install the fonts from `C:\Windows\Fonts` by checking whether the font files listed above are present.
+  </Accordion>
+
+  <Accordion title="Cannot log in / server connection error">
+    **Cause:** The Parsanegar server at `http://shivanegar.ir/` is unreachable. This can be caused by no internet connection, a firewall blocking the connection, or the server being temporarily unavailable (HTTP 503).
+
+    **Resolution:**
+    1. Verify your internet connection is active and that you can open `http://shivanegar.ir/` in a browser.
+    2. Check if a firewall or proxy is blocking outbound HTTP requests on port 80 from `WINWORD.EXE`. Add an exception if needed.
+    3. If the server returns **503 Service Unavailable**, the message "در برقراری ارتباط با سرور مشکلی وجود دارد" is shown. Wait a few minutes and try again.
+    4. For **4xx errors** (such as 401 Unauthorized or 403 Forbidden), your session token may be invalid. Clear it by disabling **Remember Me** in Settings, restarting Word, and logging in again.
+    5. If the problem persists, contact support at [nazariansani@gmail.com](mailto:nazariansani@gmail.com) or 09039402316.
+  </Accordion>
+
+  <Accordion title="Document upload fails">
+    **Cause:** Upload failures are usually caused by an expired or missing `UserToken`, a lost internet connection during upload, or the document not being in a saved state.
+
+    **Resolution:**
+    1. Confirm you are logged in — if `UserToken` is empty, the upload cannot be authorized. Log in via the Document Manager.
+    2. Ensure the document has been saved locally (Ctrl + S) before attempting to upload.
+    3. Try a manual upload: in the **پارسانگار** ribbon tab, click **بارگذاری سند** (Upload Document), or use the keyboard shortcut **Alt + U**.
+    4. Check your internet connection and try again.
+    5. If the error recurs, submit a bug report from the Document Manager → **گزارش خطا** with a description of when the failure occurred.
+  </Accordion>
+
+  <Accordion title="Captions or cross-references are not updating">
+    **Cause:** Word's field update mechanism may need to be triggered manually, especially after adding or removing figures, tables, formulas, or sections.
+
+    **Resolution:**
+    1. In the **پارسانگار** ribbon tab, click **بروزرسانی سند** (Update Document), or use the keyboard shortcut **Alt + R**.
+    2. This forces a refresh of all Word fields, captions (جدول, شکل, معادله, نقشه), cross-references, and tables of contents.
+    3. If specific items are still not updating, click inside the relevant field and press **F9** to update it individually.
+  </Accordion>
+
+  <Accordion title="Cannot use 'Save As' on a managed document">
+    **Cause:** Parsanegar intentionally disables the standard Save As functionality for managed documents to preserve document integrity, version tracking, and server synchronization. The `DisableSaveEvent` flag intercepts Save As operations.
+
+    **Resolution:**
+    - To export a copy of the document, use the **خروجی** (Export) options in the **پارسانگار** ribbon tab (keyboard shortcuts: **Alt + Shift + P** for PDF, **Alt + Shift + W** for Word export, **Alt + Shift + G** for grayscale).
+    - To export the identification pages only, use **Alt + Shift + I**.
+    - Do not attempt to bypass Save As restrictions by copying the file manually while it is open, as this may cause desynchronization with the server.
+  </Accordion>
+
+  <Accordion title="Add-in crashes or shows an error on startup">
+    **Cause:** Startup errors are typically caused by a corrupt installation, an incompatible Word version, a missing .NET runtime, or an unexpected exception during the add-in's initialization sequence.
+
+    Common startup error codes:
+    - `ErrorCodes.InternalStartup` (code **19**) — an internal exception occurred during startup initialization.
+    - `ErrorCodes.StartupProblem` (code **20**) — a general startup failure, often related to document variable access or template loading.
+
+    **Resolution:**
+    1. Note the exact error code shown in the dialog.
+    2. Try restarting Microsoft Word. If the error only occurs with a specific document, the document's internal variables may be corrupted — contact support with the document and error code.
+    3. Reinstall the Parsanegar add-in to restore all required files and registry entries.
+    4. Ensure **.NET Framework 4.8** is installed (see the missing .NET Framework entry below).
+    5. Submit a bug report including the error code: Document Manager → **گزارش خطا**, or email [nazariansani@gmail.com](mailto:nazariansani@gmail.com).
+  </Accordion>
+
+  <Accordion title="Keyboard is not switching to Persian automatically">
+    **Cause:** On startup, Parsanegar calls `checkPersianKeyboardLayout()` to verify that the Persian input language is installed and then switches the active input language to Persian via `changeKeyboardLanguage(KeyboardLanguage.Persian)`. If the Persian layout is not installed in Windows, this step is skipped and the Windows language settings page is opened instead.
+
+    **Resolution:**
+    1. If a dialog appears saying "زبان صفحه کلید فارسی موجود نیست" (Persian keyboard layout not found), add the Persian language in Windows Settings → Time & Language → Language (Windows 10/11) or Regional and Language Options (Windows 7/8).
+    2. After adding the Persian keyboard layout, restart Word. Parsanegar will detect it on the next startup.
+    3. If the automatic switch still fails silently, switch to Persian manually using the **language bar** in the Windows taskbar (system tray area), or press **Alt + Shift** / **Win + Space** to cycle input languages.
+  </Accordion>
+
+  <Accordion title="Missing .NET Framework — add-in will not load">
+    **Cause:** Parsanegar is a VSTO (Visual Studio Tools for Office) add-in built on **.NET Framework 4.8**. If this runtime is not installed, the add-in cannot load at all and will not appear in the COM Add-ins list.
+
+    **Resolution:**
+    1. Download and install **.NET Framework 4.8** from the [Microsoft .NET download page](https://dotnet.microsoft.com/en-us/download/dotnet-framework/net48).
+    2. Restart your computer after installation.
+    3. Reinstall the Parsanegar add-in.
+    4. Open Word and verify that **پارسانگار** appears in the ribbon.
+  </Accordion>
+
+</AccordionGroup>
+
+## Contacting Support
+
+If none of the steps above resolve your issue, reach out to the Parsanegar support team directly.
+
+<CardGroup cols={2}>
+  <Card title="Support Email" icon="envelope">
+    [nazariansani@gmail.com](mailto:nazariansani@gmail.com)
+  </Card>
+  <Card title="Support Mobile" icon="phone">
+    09039402316
+  </Card>
+  <Card title="Website" icon="globe">
+    [http://shivanegar.ir/](http://shivanegar.ir/)
+  </Card>
+  <Card title="In-app Bug Report" icon="bug">
+    Document Manager → **گزارش خطا** (Bug Report)
+  </Card>
+</CardGroup>
+
+When contacting support, please include:
+
+- The **error code** from any dialog that was shown (e.g., error code 19 = `InternalStartup`)
+- Your **add-in version** (visible in the About dialog: **پارسانگار** ribbon → **درباره** gallery → **درباره پارسانگار**)
+- Your **Windows version** and **Microsoft Word version**
+- A description of the steps that led to the problem

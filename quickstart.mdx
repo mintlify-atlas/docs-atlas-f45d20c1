@@ -1,47 +1,82 @@
 ---
-title: "Quickstart"
-description: "Begin with a guide on the fastest path to a successful outcome"
+title: "Get Started with Parsanegar in Microsoft Word"
+sidebarTitle: "Quickstart"
+description: "Create your first Persian academic document with Parsanegar in five steps. Learn how to log in, pick a template, set up document metadata, and use the ribbon tools."
 ---
 
-Describe how someone begins using your product. What is the first thing they need to do? Are there any prerequisites?
-
-A quickstart should take someone from zero to using your product. They'll get a quick win and a sense of what they can accomplish.
-
-## Prerequisites
-
-Before you begin, you must have:
-
-- Requirement one (for example, Node.js 18+, a free account, an API key)
-- Requirement two (for example, a compatible device, a compatible browser, a compatible operating system)
-
-## Get started
+This guide walks you through the complete flow for creating your first Persian academic document with Parsanegar — from logging in through the ribbon all the way to exporting a final PDF. By the end you will have a structured, university-formatted Word document inside your workspace, ready for writing.
 
 <Steps>
-  <Step title="Install">
-    Describe how to install your product or sign up.
+  <Step title="Log in to Parsanegar">
+    Open Microsoft Word. Click the **پارسانگار** tab in the ribbon. In the **مدیریت اسناد** (Document Manager) group on the far left, click the **ورود** button (`btnLogin`).
 
-    ```bash
-    npm install your-package
-    ```
+    A login window opens. Enter your Iranian mobile phone number and submit. An OTP verification code will be sent to your number. Enter the code in the next screen to complete authentication.
+
+    Once logged in, the login button changes to show your profile, and the Document Manager gallery becomes active.
   </Step>
-  <Step title="Configure">
-    Describe any setup or configuration needed before first use.
 
-    ```bash
-    your-cli init
-    ```
+  <Step title="Create a new document">
+    In the **مدیریت اسناد** group, click the **galleryDocumentsManager** gallery dropdown. Select **ایجاد سند جدید** (Create New Document) from the three gallery items.
+
+    The Document Creation wizard opens. Work through the wizard slides:
+
+    1. **Document type** — choose one of: پروژه (Project), پایان‌نامه (Thesis), رساله (Dissertation), or تحقیق درسی (School Research).
+    2. **University template** — select your institution from the supported universities: دانشگاه یزد, دانشگاه آزاد اسلامی واحد یزد, دانشگاه آزاد اسلامی واحد مرکزی, or دانشگاه علم و صنعت.
+    3. **Academic degree** — select کاردانی, کارشناسی, کارشناسی ارشد, or دکتری as appropriate.
+
+    The wizard assembles the correct section template files for your combination of university and document type.
   </Step>
-  <Step title="Run it">
-    Show the first thing a user does to see it working.
 
-    ```bash
-    your-cli start
-    ```
+  <Step title="Fill in document metadata">
+    After the wizard creates the document, Word opens it from within the `Documents\ShivaNegarWorkspace` folder. The cover page and identity page contain editable **content control fields** for all required metadata. Click each field and type the appropriate value:
+
+    | Field | Description |
+    |---|---|
+    | عنوان (Title) | Full Persian and English title of the thesis or project |
+    | نام دانشجو (Student name) | Author's full name in Persian and English |
+    | استاد راهنما (Supervisor) | First and second supervisor names |
+    | استاد مشاور (Advisor) | Advisor names if applicable |
+    | دانشکده / گروه (Faculty / Department) | Faculty, department, and field of study |
+    | سال تحصیلی (Academic year) | Defense date and academic year |
+
+    These fields are stored as structured variables inside the document and propagate automatically to the abstract page, English identity page, and other sections that reference them.
+  </Step>
+
+  <Step title="Explore the ribbon groups">
+    With a Parsanegar document open, all ribbon groups in the **پارسانگار** tab become active. The table below describes each group and its primary purpose:
+
+    | Group | Purpose |
+    |---|---|
+    | مدیریت اسناد (`grpDocumentManager`) | Open, create, archive, and manage documents; edit metadata; add or remove document sections |
+    | قالب‌بندی (`grpFormat`) | Apply body text style or set heading levels (Heading 2–5) to selected paragraphs |
+    | شرح و ارجاع (`grpCaptionsAndRefer`) | Insert numbered Persian captions for figures (شکل), tables (جدول), and formulas (معادله); open the cross-reference panel |
+    | پانویس (`grpFootnotes`) | Insert a right-to-left Persian footnote or a left-to-right English footnote at the cursor position |
+    | ویراستار (`grpVirastar`) | Insert or auto-correct half-spaces (نیم‌فاصله), fix punctuation (نشانه‌گذاری), apply spelling corrections, convert numbers between Persian and English digits, and format poem text in one-column or two-column layout |
+    | مدیریت منابع (`grpCitationManager`) | Insert in-text citations, manage sources using Word's built-in source manager, import bibliography files, switch citation style (APA / IEEE), and jump to the bibliography section |
+    | گزینه‌های دیگر (`grpOtherOptions`) | Update all tables of contents/figures, upload the document to the cloud, and export to Word (.docx), grayscale PDF, identification sheet, or CD label |
+    | ابزارها (`grpTools`) | Generate a Besmellah page, insert or edit a dedication (تقدیم), design a CD label, create a defense announcement (اطلاعیه دفاع), and insert verses from the Quran or Nahj al-Balagha |
+
+    <Tip>
+      The fastest way to insert a half-space (نیم‌فاصله) while typing is with the keyboard shortcut **Alt + H**. You can also run the automatic half-space corrector across your entire document from the **ویراستار** group — it will scan and fix all half-space placement in one pass.
+    </Tip>
+  </Step>
+
+  <Step title="Write, cite, and export">
+    With the template in place and metadata filled in, you are ready to write. A few tips for your workflow:
+
+    - **Heading styles** — use **Alt + 2** through **Alt + 5** to apply Heading 2–5 styles, or **Alt + N** for body text. The Table of Contents will update automatically from these styles.
+    - **Insert citations** — place the cursor in text and click **درج منبع** (`btnInsertCitation`) in the مدیریت منابع group to open the citation task pane and search your source list.
+    - **Caption figures and tables** — select an image or position the cursor below a table, then click the appropriate caption button in the **شرح و ارجاع** group to insert a numbered Persian caption.
+    - **Update tables** — after writing, click **بروزرسانی** (`btnUpdateDocument`) in **گزینه‌های دیگر** to refresh the Table of Contents, Table of Figures, and Table of Tables in one step.
+    - **Export** — when your document is complete, use the **خروجی** (`galleryExport`) gallery in **گزینه‌های دیگر** to export a clean Word file (with all variables stripped) or a PDF. The original workspace document is preserved unchanged.
   </Step>
 </Steps>
 
-<Tip>
-  Give people a way to get help. This could be a link to a support page, a chat with a customer support agent, or a forum for your product.
-
-  Example: Need help? Reach out to us at [support@yourcompany.com](mailto:support@yourcompany.com).
-</Tip>
+<CardGroup cols={2}>
+  <Card title="Creating Documents" icon="file-plus" href="/guides/creating-documents">
+    Detailed walkthrough of the Document Creation wizard, section management, and metadata fields.
+  </Card>
+  <Card title="Document Templates" icon="file-lines" href="/guides/document-templates">
+    Full reference for university templates, template types, and included document sections.
+  </Card>
+</CardGroup>

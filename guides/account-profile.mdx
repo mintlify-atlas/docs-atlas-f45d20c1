@@ -1,0 +1,118 @@
+---
+title: "Manage Your Parsanegar Account and Profile"
+sidebarTitle: "Account & Profile"
+description: "Log in, view your profile, submit bug reports, and manage your Parsanegar account from the Document Manager."
+---
+
+All Parsanegar features require a free account authenticated via your Iranian mobile phone number. No initial password is needed — the first login registers your account automatically. Account management, profile editing, and bug reporting are all handled through the **Document Manager**, accessible from the ribbon's **پارسانگار** tab.
+
+## Logging In
+
+<Steps>
+  <Step title="Open the login panel">
+    In the **پارسانگار** ribbon tab, click the **ورود** (Login) button, or open the **مدیریت اسناد** (Document Manager). If you are not logged in, the Login view is shown automatically.
+  </Step>
+  <Step title="Enter your mobile number">
+    Type your Iranian mobile number in the input field (e.g., `09123456789`). The add-in sends a request to `GET api/test?mobile=<number>` to check whether the number is registered.
+
+    - **Existing account (status = 1):** The password entry screen appears. Enter your password to continue.
+    - **New account (status = 0):** A registration request is sent to `POST api/login?mobile=<number>`. On success (status = 2), your account is created and a confirmation screen is shown.
+  </Step>
+  <Step title="Enter your password">
+    For existing accounts, enter your password. The add-in sends `POST api/login?mobile=<number>&password=<password>`. On success, a Bearer token is returned from the server and saved to `Properties.Settings.Default.UserToken`.
+  </Step>
+  <Step title="Start working">
+    Once logged in, the add-in navigates to the Documents view. Ribbon controls become active for any document located in your configured workspace directory.
+  </Step>
+</Steps>
+
+<Note>
+  If your session token expires or becomes invalid (HTTP 4xx response), Parsanegar will clear `UserToken` and `Mobile` from settings and redirect you back to the Login view. This can happen if your account is deactivated or if the token is revoked server-side.
+</Note>
+
+## Login Persistence
+
+Login persistence is controlled by the **Remember Me** (`RememberUser`) setting in the Settings panel.
+
+- **Enabled (default):** Your `UserToken` and mobile number are stored across Word restarts. You will remain logged in until you explicitly log out.
+- **Disabled:** Both values are cleared when Word closes (`ThisAddIn_Shutdown`). You must log in at the beginning of every Word session.
+
+To change this behavior, open the Document Manager → **تنظیمات** (Settings) and toggle the **Remember Me** option.
+
+## Viewing Your Profile
+
+Your registered profile information is fetched from `GET api/profile` using your stored `UserToken` as the Bearer authorization header.
+
+To open the Profile view:
+
+1. Open the **مدیریت اسناد** (Document Manager).
+2. Navigate to the **پروفایل** (Profile) section from the left-side navigation.
+
+The following information is displayed:
+
+| Field | Description |
+|---|---|
+| Mobile (موبایل) | Your registered mobile number — read-only |
+| Name (نام) | Your first name — editable |
+| Family (نام خانوادگی) | Your last name — editable |
+
+After editing your name or family name, click **ذخیره تغییرات** (Save Changes) to submit the update via `setUserInformation()`.
+
+If the server returns an unexpected response or a 4xx error, Parsanegar will clear your session and redirect you to the Login view.
+
+## Changing Your Password
+
+Password recovery and change functionality is available from the Login panel.
+
+1. On the password entry screen, click the **فراموشی رمز عبور** (Forgot Password) link.
+2. Enter your registered mobile number. The add-in sends `POST api/forget` with your mobile number.
+3. If the number exists (status = 1), a new temporary password is sent to your mobile. The confirmation screen (`changePasswordResultPageIndex`) is shown.
+4. Use the temporary password to log in, then update it from your account settings.
+
+The login panel uses an indexed page system (`loginPageIndex = 0`, `passwordPageIndex = 1`, `changePasswordPageIndex = 2`, `changePasswordResultPageIndex = 3`, `RegisterResultPageIndex = 4`) to transition between login, password entry, password change, and registration result screens.
+
+## Submitting a Bug Report
+
+If you encounter a problem with Parsanegar, you can submit a report directly from inside the add-in. Reports are submitted via `POST api/report` as multipart form data and automatically include diagnostic information about your system, Word version, and add-in settings.
+
+**To submit a bug report:**
+
+1. Open the **مدیریت اسناد** (Document Manager).
+2. Navigate to the **گزارش خطا** (Bug Report) view.
+3. Describe the issue in the text field (minimum 10 characters required).
+4. Optionally, click **انتخاب فایل** (Choose File) to attach a relevant file (e.g., a screenshot or the problematic document).
+5. Click **ارسال گزارش** (Send Report). The report is sent with type `UserReport = 1` and automatically appended diagnostic data including:
+   - Add-in version
+   - Workspace directory path
+   - Virastar and caption settings
+   - Microsoft Word version and path
+   - Operating system version and architecture
+   - System RAM and CPU information
+   - List of installed add-ins
+
+On success, a confirmation dialog is shown and you are returned to the main Document Manager view.
+
+Alternatively, contact support directly:
+
+<CardGroup cols={2}>
+  <Card title="Support Email" icon="envelope">
+    [nazariansani@gmail.com](mailto:nazariansani@gmail.com)
+  </Card>
+  <Card title="Support Mobile" icon="phone">
+    09039402316
+  </Card>
+</CardGroup>
+
+## About Parsanegar
+
+The **درباره** (About) gallery in the ribbon provides quick access to version information and online resources.
+
+| Gallery Item | Action |
+|---|---|
+| **آرشیو فیلم های راهنما** | Opens the tutorial video archive |
+| **سامانه شیوانگار** | Opens the Parsanegar website at [http://shivanegar.ir/](http://shivanegar.ir/) |
+| **درباره پارسانگار** | Displays add-in version and build information |
+
+<Note>
+  Administrator accounts (stored in `StringConstant.AdministratorAccounts`) receive elevated access. Administrator users bypass the standard workspace directory check — ribbon controls are enabled regardless of whether the active document is in the workspace folder. Contact support if you believe your account should have administrator access.
+</Note>

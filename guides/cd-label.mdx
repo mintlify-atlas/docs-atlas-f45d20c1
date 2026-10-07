@@ -1,0 +1,71 @@
+---
+title: "Design a CD/DVD Label for Your Academic Submission"
+sidebarTitle: "CD Label"
+description: "Use the Parsanegar CD label designer to create a formatted disc cover for your thesis or dissertation submission, saved as a PDF."
+---
+
+Iranian universities typically require a CD or DVD containing the thesis or dissertation alongside the printed and bound copy. Parsanegar's CD label designer creates a properly formatted, circular disc cover graphic populated automatically with your document metadata — title, author, supervisors, faculty, field of study, and defense date — and exports it directly to a PDF ready for printing.
+
+<Warning>
+  The CD label section uses a zero-margin page layout. Do not manually edit the page setup, margins, or section break of the CD section. Altering these settings can misalign the circular disc graphic and produce an unusable print file.
+</Warning>
+
+## Opening the CD Label Designer
+
+In the Parsanegar ribbon, open the **ابزارها** (Tools) gallery and select **برچسب لوح فشرده** (CD Label). Parsanegar performs the following actions automatically:
+
+- If a previous CD section already exists in the document (from an earlier run of this tool), it is deleted and replaced.
+- A new section break (next page) is inserted at the end of the document.
+- The new section's page margins (top, bottom, left, right) and header/footer distances are all set to zero.
+- A circular canvas shape (116 mm × 116 mm) containing the full CD cover layout is inserted into the new section.
+- The **DesigningCDTaskPane** task pane opens on the right side of the Word window.
+
+## How It Works
+
+<Steps>
+  <Step title="Metadata is pre-filled">
+    When the task pane initialises, Parsanegar reads the document's stored variable fields and populates the CD design automatically with:
+
+    - **دانشکده** — faculty / department
+    - **گروه** — academic group
+    - **نوع سند** — document type (thesis, dissertation, etc.)
+    - **مقطع تحصیلی** — academic degree level
+    - **رشته تحصیلی** — field of study
+    - **عنوان** — document title
+    - **استاد راهنما** — supervisor name(s)
+    - **استاد مشاور** — advisor name(s)
+    - **نگارنده** — author name
+    - **تاریخ دفاع** — defense date
+    - The university emblem is automatically loaded from the template associated with your document.
+  </Step>
+  <Step title="Customise the design">
+    Use the controls in the task pane to adjust the visual style of the CD cover:
+
+    - **رنگ پس‌زمینه** — background fill colour of the outer disc circle
+    - **رنگ متن** — text colour for all labels on the disc
+    - **رنگ آیکون دانشگاه** — tint colour applied to the university emblem
+    - **رنگ خط دور** — border line colour for the outer and inner circles
+    - **ضخامت خط** — border line weight (1–n pt); enable/disable the border using the toggle
+    - **تعداد خروجی** — choose whether to export one or two copies of the disc label per page
+
+    Click **حالت پیش‌فرض** (Reset to Default) at any time to restore the original colour scheme (dark blue background, white text and icon, no border).
+  </Step>
+  <Step title="Export to PDF">
+    When you are satisfied with the layout, click the **درج** (Insert / Save) button in the task pane. A Save dialog opens.
+
+    - Choose the destination folder and filename for the PDF output.
+    - Parsanegar exports only the CD section pages using `WdExportFormat.wdExportFormatPDF`, optimised for print.
+    - After the export, the CD section and the DesigningCDTaskPane are automatically removed from the document, and the cursor returns to your previous position.
+  </Step>
+</Steps>
+
+<Note>
+  Closing the document while the CD label task pane is open will trigger a standard Word close confirmation. The CD section will remain in the document until you either complete the export (which removes it automatically) or manually dismiss the task pane using the close button.
+</Note>
+
+## Notes on the CD Section
+
+- The CD canvas is a 116 mm × 116 mm circular shape with a 23 mm inner cutout circle representing the disc hub hole.
+- The section is appended at the very end of your document and has its headers and footers unlinked from the preceding section, so it does not inherit page numbers or running heads.
+- If you run the CD label tool a second time, any existing CD section is detected and replaced — you will not end up with duplicate CD pages in your document.
+- The exported PDF is a separate file. Your main Parsanegar document is not modified by the export (the CD section is removed from it after a successful PDF save, returning the document to its original state).

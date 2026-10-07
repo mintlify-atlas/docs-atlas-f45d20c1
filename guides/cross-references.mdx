@@ -1,0 +1,65 @@
+---
+title: "Insert Cross-References with the Parsanegar Reference Panel"
+sidebarTitle: "Cross-References"
+description: "Use the Parsanegar Cross-Reference task pane to insert references to figures, tables, formulas, and sections anywhere in your document."
+---
+
+Cross-references (ارجاع) let you cite figures, tables, formulas, and section headings from anywhere in your document, with numbers that update automatically when content is rearranged. Instead of typing "شکل ۲-۳" by hand — and risking it going stale when you add a new figure — Parsanegar inserts a live field that always reflects the current caption number.
+
+## Opening the Cross-Reference Panel
+
+Click **ارجاع** (`Alt+Shift+R`) in the **عنوان‌ها و ارجاع** group on the Parsanegar ribbon tab. A task pane slides in on the right side of Word. The panel loads the full list of captions and headings available in your document and remains open while you continue editing, so you can insert multiple cross-references without reopening it each time.
+
+The panel contains:
+
+| Control | Purpose |
+|---|---|
+| **ارجاع به** (combo box) | Filter the list by caption type: همه موارد, شکل, جدول, معادله, or a heading style |
+| **جستجو** (search box) | Filter the list by caption text |
+| **لیست عناوین** | Scrollable list of all matching captions |
+| **ارجاع داخل پرانتز باشد** | Wrap the inserted reference in parentheses — e.g., (شکل ۱-۲) |
+| **پیش‌نمایش** | Shows exactly what will be inserted before you click ارجاع |
+| **ارجاع** (button) | Inserts the reference at the cursor position |
+
+## Inserting a Cross-Reference
+
+<Steps>
+  <Step title="Open the cross-reference panel">
+    Click **ارجاع** in the **عنوان‌ها و ارجاع** ribbon group, or press `Alt+Shift+R`. The task pane appears on the right side of the Word window.
+  </Step>
+  <Step title="Filter the list (optional)">
+    Use the **ارجاع به** dropdown to show only one caption type (شکل, جدول, or معادله). Use the **جستجو** text box to search by caption text if your document has many captions.
+  </Step>
+  <Step title="Select the caption">
+    Click the desired caption in the list. The **پیش‌نمایش** field shows the exact text that will be inserted — for example, `شکل ۲-۱` or `(معادله ۱-۳)` if parentheses are enabled.
+  </Step>
+  <Step title="Set parentheses preference">
+    If you want the reference wrapped in parentheses — common for formula references — toggle **ارجاع داخل پرانتز باشد** on. For formula captions, this option is enabled automatically.
+  </Step>
+  <Step title="Place your cursor in the document">
+    Click in the document body at the exact position where the cross-reference should appear. The task pane stays open.
+  </Step>
+  <Step title="Insert the reference">
+    Click the **ارجاع** button in the task pane, or double-click the caption in the list, or press `Enter`. Parsanegar inserts the reference as a Word cross-reference field at the cursor position.
+  </Step>
+</Steps>
+
+<Tip>
+  Before exporting or printing your final document, run **بروزرسانی سند** (`Alt+R`) to update all fields — cross-references, captions, and the table of contents — in a single step. This ensures that every "شکل ۱-۲" in the body text matches the actual caption numbers on the pages.
+</Tip>
+
+## Refreshing the Caption List
+
+If you add new captions after opening the cross-reference panel, click the **بروزرسانی لیست** (refresh) button at the top of the panel to reload all captions from the document. The list does not update automatically while the panel is open.
+
+## Updating Cross-References
+
+Cross-reference fields in Word are updated by Parsanegar's **بروزرسانی سند** (`Alt+R`) command, which refreshes all fields in the document at once. Use this command:
+
+- After adding or deleting captions
+- After reordering sections or chapters
+- Before generating a PDF or printing
+
+<Note>
+  Cross-reference fields inserted by Parsanegar use Word's native `REF` field mechanism tied to `SEQ` caption fields. This means they are fully compatible with Word's built-in Update Fields command as well, but **بروزرسانی سند** is the recommended way to ensure all Parsanegar-managed fields update together.
+</Note>

@@ -1,0 +1,64 @@
+---
+title: "Parsanegar: Persian Academic Writing Add-in for Word"
+sidebarTitle: "Introduction"
+description: "Parsanegar is a Microsoft Word add-in for Persian academic writing. Write thesis and dissertation documents with structured templates, citation tools, and cloud sync for Iranian universities."
+---
+
+پارسانگار (Parsanegar) is a Microsoft Word VSTO add-in designed specifically for Persian-language academic authoring at Iranian universities. It adds a dedicated **پارسانگار** ribbon tab to Microsoft Word, providing structured document templates, citation management, Persian text editing tools, and cloud synchronization — all tailored to the formatting requirements of Iranian higher-education institutions.
+
+<CardGroup cols={2}>
+  <Card title="Installation" icon="download" href="/installation">
+    Install the add-in on Windows, set up prerequisites, and log in with your mobile number.
+  </Card>
+  <Card title="Quickstart" icon="bolt" href="/quickstart">
+    Create your first academic document in five steps using the پارسانگار ribbon.
+  </Card>
+  <Card title="Document Templates" icon="file-lines" href="/guides/document-templates">
+    Explore university-specific templates for thesis, dissertation, project, and school research documents.
+  </Card>
+  <Card title="Settings & Tools" icon="wrench" href="/guides/settings">
+    Configure workspace directory, auto-save, fonts, and keyboard layout preferences.
+  </Card>
+</CardGroup>
+
+## How It Works
+
+When Parsanegar is installed, it registers as a Word add-in and adds the **پارسانگار** tab to the ribbon. All add-in features revolve around a dedicated workspace directory on your computer — by default `Documents\ShivaNegarWorkspace`. Documents must reside inside this workspace for the add-in to grant full access to its tools.
+
+On every document open, Parsanegar checks the document's access type and adjusts the ribbon accordingly:
+
+| Access Type | Description |
+|---|---|
+| `AccessGranted` | Document is inside the workspace and belongs to the logged-in user. All ribbon controls are enabled. |
+| `AccessGranted_Administrator` | Document is opened by an administrator account. Ribbon controls are visible but operate in admin mode. |
+| `AccessDenied_NoHasAccessing` | Document is outside the workspace or not recognized. All ribbon controls are hidden. |
+
+At startup and document open, the add-in also:
+- Checks for application updates from the Parsanegar server
+- Verifies that the required Persian fonts are installed (bundled fonts include B Nazanin, B Zar, B Lotus, B Yagut, IranNastaliq, Vazirmatn, and others)
+- Sets the active keyboard layout to Persian
+- Restores the last scroll position in the document
+
+<Note>
+  All Parsanegar-managed documents must be saved inside the workspace directory (`Documents\ShivaNegarWorkspace` by default). Opening a `.docx` file from any other folder will hide all ribbon controls. The workspace folder is created automatically on first launch.
+</Note>
+
+## Supported Universities
+
+Parsanegar ships with built-in, structured templates for the following universities. Each template set includes section layouts, page setup, header/footer styles, cover page, and bibliography formatting that match the university's official guidelines.
+
+- **دانشگاه یزد** — Yazd University (`YazdUniversity`)
+- **دانشگاه آزاد اسلامی واحد یزد** — Islamic Azad University, Yazd Branch (`AzadUniversityYazd`)
+- **دانشگاه آزاد اسلامی واحد مرکزی** — Islamic Azad University, Central Branch (`AzadUniversityCentral`)
+- **دانشگاه علم و صنعت** — Iran University of Science and Technology (`ScienceAndTechnologyUni`)
+
+## Supported Document Types
+
+Each new document is created with one of the following academic types. The chosen type controls which template sections are included and how the document metadata fields (title, supervisor, academic degree, etc.) are labelled.
+
+| Code | Persian Name | Description |
+|---|---|---|
+| `Project` (0) | پروژه | Undergraduate or graduate project report |
+| `Thesis` (1) | پایان‌نامه | Master's thesis (کارشناسی ارشد) |
+| `Dissertation` (2) | رساله | Doctoral dissertation (دکتری) |
+| `SchoolResearch` (3) | تحقیق درسی | Course research report or internship report |

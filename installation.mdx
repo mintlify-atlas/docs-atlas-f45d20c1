@@ -1,0 +1,69 @@
+---
+title: "Install Parsanegar Add-in for Microsoft Word"
+sidebarTitle: "Installation"
+description: "Step-by-step guide to installing the Parsanegar Word add-in on Windows. Requires .NET Framework 4.8, Microsoft Word, and a supported Windows version."
+---
+
+The Parsanegar installer is a Windows setup package built with Advanced Installer. It registers the ShivaNegar VSTO add-in with Microsoft Word, installs the VSTO runtime if needed, and bootstraps .NET Framework 4.8 automatically. After installation, Word displays a new **پارسانگار** ribbon tab the next time it opens.
+
+## Prerequisites
+
+Before running the installer, make sure the following are available on your machine:
+
+- **Windows** — Windows 10 or Windows 11 (64-bit recommended)
+- **Microsoft Word** — Office 2016 or later (Microsoft 365 is fully supported)
+- **.NET Framework 4.8** — Bundled by the installer; also available from Microsoft Update
+- **Visual Studio Tools for Office (VSTO) Runtime** — Bundled by the installer; required for all Word VSTO add-ins
+- An active internet connection during first launch (for update check and OTP login)
+
+<Warning>
+  Parsanegar requires .NET Framework 4.8. Attempting to install on a machine running only .NET Core or .NET 5+ without the .NET Framework 4.8 runtime will cause the add-in to fail to load inside Word.
+</Warning>
+
+## Installation Steps
+
+<Steps>
+  <Step title="Download the installer">
+    Go to the official Parsanegar website at [http://shivanegar.ir/](http://shivanegar.ir/) and download the latest setup package. The installer filename follows the pattern `ShivaNegar_Setup_x.x.x.x.exe`.
+  </Step>
+
+  <Step title="Run the installer">
+    Double-click the downloaded setup file. If Windows shows a User Account Control (UAC) prompt, click **Yes** to allow the installation.
+
+    The installer will:
+    - Detect and install .NET Framework 4.8 if it is not already present
+    - Install the VSTO 4.0 runtime if it is not already present
+    - Register the ShivaNegar add-in with Microsoft Word
+    - Create the application entry in Windows Add/Remove Programs
+
+    Follow the on-screen prompts and accept the license agreement to complete the process.
+  </Step>
+
+  <Step title="Open Microsoft Word">
+    After the installation finishes, open (or restart) Microsoft Word. A new **پارسانگار** tab will appear in the ribbon, immediately after the **Home** tab.
+
+    If Word was already open during installation, close and reopen it fully — the add-in loads at Word startup.
+  </Step>
+
+  <Step title="Log in with your mobile number">
+    Click the **پارسانگار** tab, then click the **ورود** (Login) button. A login window will open prompting you to enter your Iranian mobile number. An OTP code will be sent to that number. Enter the code to authenticate and activate the add-in for your account.
+
+    Your session can be remembered across Word restarts using the **Remember me** option in the login screen.
+  </Step>
+</Steps>
+
+## After Installation
+
+Once the add-in is registered and you have logged in:
+
+- The **پارسانگار** ribbon tab is visible whenever Word is open.
+- Ribbon controls are **disabled** (greyed out) until you open or create a valid document from inside the workspace.
+- The workspace directory `Documents\ShivaNegarWorkspace` is created automatically on the first launch of Word with the add-in active. All Parsanegar-managed documents must be stored in this folder.
+
+<Warning>
+  Documents opened from outside the `ShivaNegarWorkspace` folder are treated as unmanaged. All پارسانگار ribbon controls will be hidden for those documents. Always use the Document Manager gallery inside the ribbon to open or create add-in documents.
+</Warning>
+
+<Note>
+  Every time you open a Parsanegar-managed document, the add-in silently contacts `http://shivanegar.ir/` to check for updates. If a new version is available, you will be prompted to download it before the document fully loads. Keep an internet connection available when working with Parsanegar documents.
+</Note>

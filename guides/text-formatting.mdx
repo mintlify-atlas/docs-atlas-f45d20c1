@@ -1,0 +1,56 @@
+---
+title: "Text Formatting Settings in Parsanegar Documents"
+sidebarTitle: "Text Formatting"
+description: "Configure font, paragraph spacing, and alignment settings for Persian academic documents in Parsanegar using the Format Settings dialog."
+---
+
+Text formatting in Parsanegar is configured per document template. Rather than applying manual inline styles, you adjust a named Word style — such as Normal, Heading 2, or Caption — once inside the Format Settings dialog, and every paragraph using that style updates throughout the entire document automatically. This ensures your thesis or dissertation stays consistent with university style-guide requirements from first draft to final submission.
+
+## Opening Format Settings
+
+There are two ways to reach the Format Settings dialog from the **پارسانگار** ribbon tab:
+
+- Click the **قالب‌بندی متن** button (`btnTextFormating`) in the **مدیریت متن** group. This applies the Body Text (`BodyText`) style to the current selection and is a quick shortcut for body paragraphs. The keyboard shortcut is **Alt + N**.
+- Click the **dialog launcher arrow** (▾) at the bottom-right corner of the **مدیریت متن** (`grpFormat`) group. This opens the full **FormatSettingsForm** dialog where you can configure any named style.
+
+<Note>
+  Format settings apply to the active document and are saved with it. Opening the same document on another machine will preserve the style definitions as long as the fonts used are installed — Parsanegar installs its bundled fonts automatically on startup.
+</Note>
+
+## Font Configuration
+
+The Format Settings dialog provides separate font selectors for **Persian text** (right-to-left) and **bidirectional/English text** (left-to-right), corresponding to Word's `Font.NameBi` and `Font.Name` properties respectively. Both fields support live filtering: start typing a font name to narrow the list.
+
+Parsanegar bundles the following fonts and installs them when the add-in loads, so they are always available in the selector:
+
+<CardGroup cols={2}>
+  <Card title="Persian Fonts" icon="font">
+    B Yagut, B Badr, B Lotus, B Nazanin, B Titr, B Zar, IranNastaliq, Vazir, Vazirmatn
+  </Card>
+  <Card title="Decorative & Latin Fonts" icon="a">
+    Besmellah 1–4, Times New Roman (Regular, Bold, Italic, Bold-Italic)
+  </Card>
+</CardGroup>
+
+Common choices for Persian academic body text are **B Nazanin** (14 pt) and **B Lotus** (14 pt). For English passages and citations, **Times New Roman** (12 pt) is the most widely accepted font under Iranian university style guides.
+
+## Paragraph Spacing
+
+The Format Settings dialog exposes three spacing fields for each style:
+
+| Field | Description |
+|---|---|
+| **اندازه فونت فارسی** | Size in points for the Persian (BiDi) font |
+| **فاصله خطوط** | Line spacing multiplier (e.g., `1.5` for one-and-a-half lines) |
+| **فاصله قبل** | Space before the paragraph in points |
+| **فاصله بعد** | Space after the paragraph in points |
+
+When you select a style from the **عنوان بندی** dropdown, Parsanegar reads the current values from the Word style and pre-fills all fields so you can see the existing settings before making changes. Clicking **اعمال** writes the new values back to the style definition using `style.ParagraphFormat.LineSpacing` and `style.ParagraphFormat.SpaceBefore / SpaceAfter`.
+
+## Text Direction
+
+Persian academic documents are entirely right-to-left. Parsanegar sets the correct document view direction automatically when a Parsanegar document is opened, storing the previous Word setting in `previousDocumentViewDirection` so it can be restored when the document is closed. You do not need to configure RTL direction manually — the add-in handles it as part of document initialization.
+
+<Tip>
+  Apply consistent formatting through the named style system rather than selecting text and pressing **Bold** or changing font size manually in the Home tab. Style-based formatting allows you to update the appearance of an entire class of paragraphs — all Heading 3s, for example — with a single change in the Format Settings dialog, and it guarantees the table of contents and auto-numbering fields stay accurate.
+</Tip>

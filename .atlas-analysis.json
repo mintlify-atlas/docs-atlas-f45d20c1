@@ -1,0 +1,142 @@
+{
+  "projectType": "saas",
+  "projectName": "Parsanegar (پارسانگار)",
+  "projectDescription": "A Microsoft Word VSTO add-in (ShivaNegar) for Persian academic document authoring, providing structured thesis/dissertation templates, Persian text tools, citation management, and cloud-based document synchronization for Iranian universities.",
+  "theme": "almond",
+  "primaryColor": "#2E6DA4",
+  "lightColor": "#5B9BD5",
+  "darkColor": "#1A3F6F",
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Documentation",
+        "groups": [
+          {
+            "group": "Get Started",
+            "pages": [
+              "introduction",
+              "installation",
+              "quickstart"
+            ]
+          },
+          {
+            "group": "Document Management",
+            "pages": [
+              "guides/creating-documents",
+              "guides/document-templates",
+              "guides/managing-pages"
+            ]
+          },
+          {
+            "group": "Writing & Formatting",
+            "pages": [
+              "guides/text-formatting",
+              "guides/headings-structure",
+              "guides/footnotes",
+              "guides/poem-mode"
+            ]
+          },
+          {
+            "group": "Persian Text Tools",
+            "pages": [
+              "guides/virastar",
+              "guides/number-conversion",
+              "guides/standard-correction"
+            ]
+          },
+          {
+            "group": "Captions & References",
+            "pages": [
+              "guides/captions",
+              "guides/cross-references",
+              "guides/citations",
+              "guides/bibliography"
+            ]
+          },
+          {
+            "group": "Export & Collaboration",
+            "pages": [
+              "guides/exporting",
+              "guides/networking-chat",
+              "guides/cd-label",
+              "guides/defense-announcements"
+            ]
+          },
+          {
+            "group": "Settings & Tools",
+            "pages": [
+              "guides/settings",
+              "guides/islamic-content",
+              "guides/account-profile",
+              "troubleshooting"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "keyFeatures": [
+    "VSTO Microsoft Word add-in for Persian academic document authoring",
+    "University-specific structured templates (thesis, dissertation, project, school research)",
+    "Persian text correction tools: half-space insertion, punctuation, spelling correction",
+    "Persian/English number conversion",
+    "Poem formatting mode (single-column and two-column)",
+    "Caption management for figures, tables, and formulas",
+    "Cross-reference task pane",
+    "Citation manager with APA and IEEE styles, BibTeX import",
+    "Cloud document synchronization via shivanegar.ir API",
+    "Footnote management (Persian and English)",
+    "Export to PDF, grayscale PDF, and unlocked Word (.docx)",
+    "CD/DVD label designer",
+    "Defense announcement generation",
+    "Quran and Nahj al-Balagha verse insertion",
+    "Dedication page and Besmellah page tools",
+    "Collaborative document sharing and networking"
+  ],
+  "publicApiSurface": [
+    "btnLogin_Click — Login / account access",
+    "galleryDocumentManager_Click — Document manager (manage, archive, create new)",
+    "btnChatBoxNetworking_Click — Collaborative chat networking",
+    "btnChangeContents_Click — Edit document contents/metadata",
+    "btnAddRemovePages_Click — Add or remove document pages",
+    "btnTextFormating_Click — Text formatting settings",
+    "btnHeading2/3/4/5_Click — Apply heading styles (H2–H5)",
+    "btnRefer_Click — Cross-reference task pane",
+    "btnInsertCaptionForShape/Table/Formula_Click — Insert captions for shapes, tables, formulas",
+    "galleryInsertFootnote_Click — Insert Persian or English footnote",
+    "gallerySimpleVirastar_Click — Half-space, punctuation, sign, spelling correction",
+    "btnStandardCorrection_Click — Standard text correction",
+    "galleryConvertNumber_Click — Convert numbers to Persian or English",
+    "galleryPoemMode_Click — Single or two-column poem mode",
+    "btnInsertCitation_Click — Insert a citation",
+    "galleryInsertImportSources_Click — Add sources manually or import from BibTeX",
+    "btnManageResources_Click — Manage citation sources",
+    "btnGoToBibliography_Click — Navigate to bibliography section",
+    "galleryCitationType_Click — Switch citation style (APA / IEEE)",
+    "btnUpdateDocument_Click — Update document from server",
+    "btnUploadDocument_Click — Upload document to server",
+    "galleryExport_Click — Export to grayscale PDF, PDF, or Word",
+    "galleryTools_Click — Besmellah page, dedication, CD label, defense announcement",
+    "galleryBooks_Click — Insert Quran or Nahj al-Balagha verse",
+    "galleryAbout_Click — Tutorial archive, website link, about",
+    "DedicatedFunctions.hasAccess(doc) — Check document access type",
+    "DedicatedFunctions.uploadDocument(doc, bool) — Upload document to cloud",
+    "DedicatedFunctions.saveDocument(doc) — Save document locally",
+    "DedicatedFunctions.initialSettings() — Set Persian Word environment defaults",
+    "DedicatedFunctions.restoreInitialSettings() — Restore Word settings on shutdown",
+    "DedicatedFunctions.checkingUpdate() — Check for add-in updates",
+    "DedicatedFunctions.httpAsyncGetRequest / httpAsyncPostRequest — HTTP client wrappers",
+    "API: GET api/test?mobile= — Check mobile registration",
+    "API: POST api/save?type=&name=&config= — Create new document on server",
+    "API: POST api/save/parsanegar/1?id=&config= — Save document config to server",
+    "API: GET api/get-document/{id} — Fetch document from server",
+    "API: GET api/get-package/parsanegar/1?package= — Get template package",
+    "API: GET api/get-data/parsanegar/1 — Get shared data",
+    "API: GET api/update?ver= — Check for updates",
+    "API: GET api/notif — Get notifications",
+    "API: GET api/profile — Get user profile",
+    "API: GET api/shares — Get shared documents",
+    "API: POST api/share-accept — Accept a document share",
+    "API: POST api/report — Submit bug report"
+  ]
+}

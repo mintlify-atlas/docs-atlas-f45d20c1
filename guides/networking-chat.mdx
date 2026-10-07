@@ -1,0 +1,76 @@
+---
+title: "Collaborate on Documents with the Parsanegar Chat Panel"
+sidebarTitle: "Collaboration"
+description: "Share Parsanegar documents with supervisors and collaborators, and communicate in real time using the built-in chat panel linked to your document."
+---
+
+Parsanegar includes a collaboration layer built on the [shivanegar.ir](http://shivanegar.ir/) server. You can share your document with supervisors (استاد راهنما), advisors (استاد مشاور), and analysts (همکار), and communicate with all collaborators through a document-linked chat panel — all without leaving Microsoft Word.
+
+<Note>
+  A Parsanegar account (authenticated by mobile number) is required for every collaborator. Both the document author and any invited collaborators must be registered on shivanegar.ir before sharing is possible.
+</Note>
+
+## Opening the Chat Panel
+
+Click the **گفتگو** button (linked to `btnChatBoxNetworking`) in the **مدیریت اسناد** group on the Parsanegar ribbon. The **ChatBox** task pane slides open on the right side of the Word window.
+
+When the panel opens, Parsanegar reads the server document ID stored in your document and automatically retrieves the message history for that document from the server (`GET api/messages/{id}`). Messages are displayed in a scrollable list, and the panel scrolls to the most recent message automatically.
+
+To send a message, type in the input box at the bottom of the panel and either click the send button or press **Shift + Enter**. New messages are posted to the server (`POST api/message`) with the document ID and message text, and appear immediately in the panel for all collaborators.
+
+<Tip>
+  Use the chat panel to receive supervisor feedback directly tied to your document. Because conversations are linked to a specific document ID, the full message history is preserved alongside your document on the server — separate from any general email or messaging threads.
+</Tip>
+
+## Roles in Collaborative Documents
+
+Each person connected to a shared Parsanegar document is assigned a role. Roles determine the collaborator's label in the chat panel and in the Networking Manager.
+
+| Role | Persian Name | Description |
+|---|---|---|
+| Creator | سازنده | The original document author |
+| Supervisor 1 | استاد راهنما اول | First primary supervisor |
+| Supervisor 2 | استاد راهنما دوم | Second primary supervisor |
+| Advisor 1 | استاد مشاور اول | First advisory supervisor |
+| Advisor 2 | استاد مشاور دوم | Second advisory supervisor |
+| Analyst | همکار | Research collaborator or analyst |
+
+In the chat panel, messages from other collaborators are labelled with their role name and mobile number (for example, `استاد راهنما اول (09123456789)`). Your own messages are labelled `شما`.
+
+## Sharing a Document
+
+To invite a collaborator to your document, open the **Networking Manager** from the Document Manager panel:
+
+<Steps>
+  <Step title="Open the Networking Manager">
+    In the Document Manager, select your document and navigate to the **مدیریت شبکه** (Networking Manager) view. This opens the `NetworkingManagerControl` panel.
+  </Step>
+  <Step title="Enter the collaborator's mobile number">
+    Type the collaborator's Iranian mobile number (beginning with `09`, 11 digits) into the mobile number field. Only registered Parsanegar users can be invited.
+  </Step>
+  <Step title="Select a role">
+    Choose one of the available roles from the dropdown: استاد راهنما اول، استاد راهنما دوم، استاد مشاور اول، استاد مشاور دوم، or همکار.
+  </Step>
+  <Step title="Send the invitation">
+    Click **ارسال درخواست**. Parsanegar sends the share invitation to the server (`POST api/share`). A confirmation message is displayed asking you to wait for the collaborator to accept. The invitation cannot be re-sent if one is already pending.
+  </Step>
+</Steps>
+
+## Viewing Shared Documents
+
+When another user shares a document with you, it appears in your Document Manager. Parsanegar retrieves incoming share invitations from the server (`GET api/shares/{id}`) and lists them with their current status.
+
+To accept a share, open the Document Manager. Pending invitations are shown alongside active collaborations. Accepting or declining a share sends a status update to the server (`POST api/share-accept`) with the share ID and the accepted/declined status value.
+
+Once a share is accepted, the shared document appears in your document list and you can open the chat panel to begin communicating with the document author.
+
+## Networking Manager
+
+The **Networking Manager** (`NetworkingManagerControl`) provides a full view of all active collaborators on your document. For each accepted collaborator it shows:
+
+- Full name and mobile number
+- Assigned role (e.g., استاد راهنما اول)
+
+From this panel you can also remove a collaborator's access by clicking the delete button next to their entry. This sends a `POST api/share-accept` request with `status=0`, immediately revoking their access to the shared document.
+
+Use the **بروزرسانی** (Refresh) button to reload the current collaborator list from the server at any time.

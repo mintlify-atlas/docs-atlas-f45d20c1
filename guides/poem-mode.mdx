@@ -1,0 +1,78 @@
+---
+title: "Format Persian Poetry in Parsanegar Documents"
+sidebarTitle: "Poem Mode"
+description: "Use Parsanegar's poem mode to format Persian poetry in your academic document, with support for single-column and two-column (hemistich) layouts."
+---
+
+Poem Mode lets you format Persian poetry (شعر) in your document with proper alignment, indentation, and optionally a two-column hemistich layout. Academic theses in Persian frequently include poetry from classical or contemporary sources as part of their introductions, epigraphs, or literary analysis. Parsanegar automates the otherwise tedious process of centering verses, aligning hemistichs, and applying consistent spacing so that poetry looks professional alongside regular prose without requiring manual tab stops or tables.
+
+## Poem Modes
+
+Two layout options are available via the **قالب شعر** gallery (`galleryPoemMode`) in the **ویراستاری** group:
+
+<CardGroup cols={2}>
+  <Card title="تک ستونه — Single Column" icon="align-center">
+    **PoemMode1** (`CreatePoemUsingTextColumns`)
+
+    Each verse occupies a full line, centered within equal left and right indents (4.5 cm on each side). Paragraph marks between verses are converted to manual line breaks so the entire poem reads as one paragraph block. Single-column mode is appropriate for short verses, quatrains (رباعی), and epigraphs where the two hemistichs of each verse appear on the same line.
+  </Card>
+  <Card title="دو ستونه — Two Column" icon="table-columns">
+    **PoemMode2** (`CreatePoemUsingTable`)
+
+    Each hemistich (مصراع) is placed in its own column inside a Word table (`tableTwoColumnPoem`). The first hemistich appears in the right column and the second in the left column, matching the natural right-to-left reading order of Persian poetry. Two-column mode is ideal for classical poetry (غزل, قصیده, مثنوی) where the visual separation of hemistichs is expected.
+  </Card>
+</CardGroup>
+
+### Two-column layout illustration
+
+The two-column mode produces a layout like this inside your document:
+
+| مصراع دوم (Second Hemistich) | مصراع اول (First Hemistich) |
+|:---|---:|
+| چه دانم که چیست اندر آن پرده پنهان | بیا ساقی آن می که عقل آفرین است |
+| که بگشاید این بند از اندیشهٔ من | می لعل گون ریز در جام من |
+
+The table borders are hidden so the poem appears as a natural two-column block of verse rather than a table.
+
+## Using Poem Mode
+
+<Steps>
+  <Step title="Write your poem text">
+    Type each verse (or hemistich pair) as a separate paragraph, pressing **Enter** after each line. For two-column mode, write the first hemistich of each couplet on one line and the second hemistich on the next line. For single-column mode, write each full verse on its own line.
+
+    Parsanegar requires more than one paragraph to be selected — a single line will trigger an error message.
+  </Step>
+  <Step title="Select all poem lines">
+    Click at the beginning of the first verse and drag to the end of the last verse, or use **Shift + Click** to extend the selection. Make sure all lines of the poem are included in the selection before proceeding.
+  </Step>
+  <Step title="Open the Poem Mode gallery">
+    In the **پارسانگار** ribbon tab, locate the **ویراستاری** group and click the **قالب شعر** gallery button (`galleryPoemMode`).
+  </Step>
+  <Step title="Choose a layout">
+    Select the layout you need:
+    - **تک ستونه** for single-column verses — keyboard shortcut **Alt + Q**
+    - **دو ستونه** for two-column hemistich layout — keyboard shortcut **Alt + Z**
+
+    Parsanegar will apply paragraph formatting, convert line endings, set indents, and (for two-column mode) create a formatted table with the ID `{tableTwoColumnPoem}`.
+  </Step>
+  <Step title="Review and adjust">
+    The poem is formatted and the cursor moves to the paragraph immediately after it. Review the result and use **Ctrl + Z** to undo if the layout does not match your expectations — the entire operation is recorded as a single undo step.
+  </Step>
+</Steps>
+
+<Note>
+  You must select the poem text **before** clicking a Poem Mode option. If you click without a selection, or if only one paragraph is selected, Parsanegar will display an error and no formatting will be applied. For best results, do not include blank lines within the poem selection — each non-empty paragraph is treated as one verse or one hemistich.
+</Note>
+
+## Poem Type Setting
+
+The underlying implementation (`PoemTypes` enum in `Constants.cs`) supports two technical approaches for each visual layout:
+
+- `CreatePoemUsingTextColumns` — uses Word's section-level text columns and manual line breaks
+- `CreatePoemUsingTable` — uses a hidden Word table
+
+The active approach is controlled by the **VirastarSettings_CreatePoemType** application setting. The ribbon gallery buttons (`PoemMode1` / `PoemMode2`) always produce the visually correct single-column or two-column result regardless of which implementation is active — the implementation choice affects only internal document structure, not the visual output.
+
+## Islamic Content Insertion
+
+If you need to insert Quran verses (آیات قرآن) or passages from Nahj al-Balagha (نهج البلاغه) as formatted quotations rather than manually typed poetry, use the dedicated insertion tools in the **ابزارها و کتاب‌ها** group. See the [Islamic Content guide](/guides/islamic-content) for details on searching and inserting Quranic verses and Nahj al-Balagha sermons, letters, and aphorisms directly into your document.

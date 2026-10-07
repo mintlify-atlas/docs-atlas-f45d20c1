@@ -1,0 +1,137 @@
+---
+title: "Persian Text Correction with Virastar Tools"
+sidebarTitle: "Virastar"
+description: "Automatically correct half-spaces, punctuation, tanvin marks, and spelling in Persian academic documents using Parsanegar's Virastar tools."
+---
+
+Virastar (ویراستار) is Parsanegar's suite of Persian text correction tools that enforce correct orthographic and typographic conventions required by Iranian academic standards. Rather than reviewing every word manually, Virastar applies rule-based find-and-replace passes drawn from embedded correction tables, fixing the most common issues — half-space placement, tanvin marks, punctuation spacing, and spelling — in a single operation on your selection or the full document.
+
+## The Virastar Group (ویراستاری)
+
+All Virastar commands live in the **ویراستاری** group on the Parsanegar ribbon tab. The group contains four items:
+
+<CardGroup cols={2}>
+  <Card title="ویراستاری مقدماتی" icon="text">
+    A gallery of four targeted correction tools: درج نیم‌فاصله, نیم‌فاصله گذاری, نشانه گذاری (سجاوندی), and غلط املایی.
+  </Card>
+  <Card title="زبان معیار" icon="book-open">
+    The **تصحیح استاندارد** button replaces non-standard Persian vocabulary with Academy-approved equivalents from the Standard correction table.
+  </Card>
+  <Card title="تبدیل اعداد" icon="hashtag">
+    Converts digits between Persian (Arabic-Indic) and English (ASCII) systems throughout the document or the current selection.
+  </Card>
+  <Card title="قالب شعر" icon="align-center">
+    Formats selected verse lines into single-column or double-column poem layouts.
+  </Card>
+</CardGroup>
+
+A **dialog launcher** (small arrow at the bottom-right of the group) opens the Virastar Settings panel where you can fine-tune which areas of the document each correction covers.
+
+---
+
+## Half-Space Insertion (درج نیم‌فاصله)
+
+A **half-space** (نیم‌فاصله) is the Zero Width Non-Joiner character (U+200C). Persian orthography requires it between certain word components — for example, between a verb prefix such as می‌ and its stem, or between a word and an enclitic suffix — where a full space would break the word and no space would fuse characters incorrectly. Without the proper U+200C codepoint, other Windows applications can render these positions as missing spaces or as incorrectly joined letters.
+
+Selecting **درج نیم‌فاصله** from the ویراستاری مقدماتی gallery (or using its keyboard shortcut) inserts a standard U+200C character at the current cursor position, ensuring correct rendering across all Persian-capable applications.
+
+| Action | Shortcut |
+|---|---|
+| Insert half-space at cursor | **Ctrl+Shift+2** |
+| Trigger from ribbon gallery | ویراستاری مقدماتی → درج نیم‌فاصله |
+| Trigger from keyboard (gallery item) | **Alt+H** |
+
+<Note>
+  The درج نیم‌فاصله command inserts a single character at the cursor point. To automatically place half-spaces across many words at once, use **نیم‌فاصله گذاری** instead.
+</Note>
+
+---
+
+## Auto Half-Spacing (نیم‌فاصله گذاری)
+
+**نیم‌فاصله گذاری** scans your text and automatically replaces ordinary spaces with the correct U+200C half-space wherever Persian grammar rules require one. The correction engine processes common patterns including:
+
+- Verb prefixes beginning with **می** (e.g., می‌رود, می‌کند, می‌گوید)
+- Verb suffixes such as **اند**، **اید**، **ایم**، **ای** (e.g., رفته‌اند, آمده‌اید)
+- Other high-frequency grammatical attachments covered by the embedded **HalfSpace.csv** rule table
+
+The correction applies to either the current text selection or, when no text is selected, to the entire document after a confirmation prompt.
+
+<Steps>
+  <Step title="Select text (optional)">
+    Highlight the paragraphs you want to correct. If you want to process the whole document, leave nothing selected.
+  </Step>
+  <Step title="Open the Virastar gallery">
+    In the **ویراستاری** group on the Parsanegar tab, click the **ویراستاری مقدماتی** gallery button.
+  </Step>
+  <Step title="Choose نیم‌فاصله گذاری">
+    Click **نیم‌فاصله گذاری** (or press **Alt+V**). If no text is selected, Parsanegar asks whether to apply the correction to the entire document. Click **بله** to confirm.
+  </Step>
+  <Step title="Wait for the loading indicator">
+    A progress indicator appears while Parsanegar scans and replaces. Large documents may take a few seconds.
+  </Step>
+</Steps>
+
+<Tip>
+  Run نیم‌فاصله گذاری as one of the final steps before exporting your thesis or article. At that point all body text is finalized, so the correction will cover every paragraph that will appear in the output file.
+</Tip>
+
+---
+
+## Punctuation Correction (نشانه گذاری سجاوندی)
+
+**نشانه گذاری (سجاوندی)** corrects two categories of problems:
+
+1. **Tanvin marks** — words that should carry a tanvin (تنوین) suffix are corrected to their proper written form. Common examples:
+   - حتما → حتماً
+   - قطعا → قطعاً
+   - اصلا → اصلاً
+   - لطفا → لطفاً
+
+2. **Whitespace normalization** — consecutive or non-standard whitespace characters (`^w`) are collapsed to a single standard space.
+
+The correction data is drawn from the embedded **Tanvin.csv** and **Signs.csv** rule tables. It operates on the current selection or the entire document.
+
+<Note>
+  نشانه گذاری runs the same find-and-replace engine used by all other Virastar tools. If you have a selection active when you trigger it, only the selected range is modified. If your cursor is simply positioned in the text with no selection, Parsanegar will ask whether to apply the correction to the full document.
+</Note>
+
+---
+
+## Spelling Correction (غلط املایی)
+
+**غلط املایی** corrects predictable Persian spelling mistakes using the embedded **SpellingCorrection.csv** table. This includes common confusions between similar letters, non-standard informal spellings that appear in typed text, and other systematic orthographic errors.
+
+Like the other Virastar tools, the correction is applied to the current selection when one is active, or to the entire document after a confirmation dialog. Press **Alt+E** to trigger it from the keyboard.
+
+<Tip>
+  غلط املایی focuses on rule-based substitutions for known mistakes. It is not a dictionary lookup — for comprehensive proofreading, combine it with Word's built-in spell-checker after running all Virastar corrections.
+</Tip>
+
+---
+
+## Virastar Settings (تنظیمات ویراستاری)
+
+Click the **dialog launcher** (small arrow icon) at the bottom-right corner of the **ویراستاری** group to open the **تنظیمات ویراستاری** panel. This form lets you control exactly where each Virastar correction is applied.
+
+### Half-Space Correction Scope
+
+| Setting | Description |
+|---|---|
+| اصلاح نیم فاصله در پانویس‌ها | Include document footnotes in auto half-spacing passes |
+| اصلاح نیم فاصله در سرصفحه و پاصفحه | Include headers and footers |
+| اصلاح نیم فاصله در فیلدهای خاص | Include special fields such as text boxes |
+
+### Number Conversion
+
+| Setting | Description |
+|---|---|
+| جایگزین کردن کاراکتر عدد | Also convert the underlying Unicode digit character (not just its visual appearance) when converting between Persian and English digits |
+
+### Poem Layout
+
+Choose whether the **قالب شعر** feature formats verse lines as **ستونی** (using text columns) or **جدولی** (using a table).
+
+<Tip>
+  Before your final export, run all four Virastar corrections in sequence — نیم‌فاصله گذاری, نشانه گذاری, غلط املایی, then زبان معیار — to ensure the document meets Iranian academic writing standards throughout.
+</Tip>

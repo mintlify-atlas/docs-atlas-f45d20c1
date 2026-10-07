@@ -1,0 +1,112 @@
+---
+title: "Insert Quran Verses, Nahj al-Balagha, and Dedication Pages"
+sidebarTitle: "Islamic Content"
+description: "Insert Quran verses, Nahj al-Balagha passages (sermons, letters, wisdoms), Besmellah pages, and dedication text into your Parsanegar academic document."
+---
+
+Parsanegar includes specialized tools for inserting Islamic textual content commonly found in Persian academic documents. These tools allow you to insert Quranic verses, passages from Nahj al-Balagha (نهج البلاغه), a calligraphic Besmellah (بسم الله) opening page, and a formatted dedication (تقدیم) section — all sourced from bundled, verified datasets and rendered with appropriate Arabic and Persian typography.
+
+<Tip>
+  Before opening any of the Islamic content task panes, place your cursor at the exact position in the document where you want the content inserted. Each task pane inserts at the current cursor location.
+</Tip>
+
+## Quran Verses (قرآن مجید)
+
+The Insert Quran task pane (`InsertQuranTaskPane`) lets you browse the full Quran by Surah and Ayah and insert a selected verse directly into your document with correct Arabic right-to-left formatting.
+
+Verse data is loaded from two bundled embedded CSV resources:
+
+- `Surah.csv` — the list of all 114 Suras (سور)
+- `Ayeh.csv` — all individual verses (آیات) keyed to their Surah
+
+<Steps>
+  <Step title="Open the Insert Quran task pane">
+    In the **پارسانگار** ribbon tab, click the **کتب** (Books) gallery and select **قرآن مجید**. The task pane docks to the right side of the Word window.
+
+    Alternatively, use the keyboard shortcut **Alt + Shift + Q**.
+  </Step>
+  <Step title="Select a Surah">
+    From the Surah dropdown or list, choose the chapter you want. The list is populated from the bundled `Surah.csv` file, which includes all 114 Suras with their Arabic and Persian names.
+  </Step>
+  <Step title="Select an Ayah">
+    After selecting a Surah, the Ayah list populates from `Ayeh.csv` filtered to that Surah. Choose the specific verse you want to insert.
+  </Step>
+  <Step title="Insert the verse">
+    Click the insert button. The selected Ayah is inserted at the current cursor position in the document, formatted in Arabic script with right-to-left paragraph direction.
+  </Step>
+  <Step title="Close the task pane">
+    Click the **✕** (close) button in the task pane header when finished. The task pane is removed from the Word window.
+  </Step>
+</Steps>
+
+## Nahj al-Balagha (نهج البلاغه)
+
+The Insert Nahj al-Balagha task pane (`InsertNahjBalagheTaskPane`) provides access to the three content categories of Nahj al-Balagha, sourced from bundled CSV files.
+
+**Content categories:**
+
+<CardGroup cols={3}>
+  <Card title="خطبه (Sermons)" icon="microphone">
+    The sermons and speeches of Imam Ali (A.S.), sourced from `Khotbeh.csv`.
+  </Card>
+  <Card title="نامه (Letters)" icon="envelope">
+    Letters and commands written by Imam Ali (A.S.), sourced from `Nameh.csv`.
+  </Card>
+  <Card title="حکمت (Wisdoms)" icon="lightbulb">
+    Short aphorisms and wise sayings, sourced from `Hekmat.csv`.
+  </Card>
+</CardGroup>
+
+**To insert a Nahj al-Balagha passage:**
+
+1. In the **پارسانگار** ribbon tab, click the **کتب** (Books) gallery and select **نهج البلاغه**. The task pane opens docked to the right side of the window.
+
+   Alternatively, use the keyboard shortcut **Alt + Shift + A**.
+
+2. Select the content type: **خطبه**, **نامه**, or **حکمت**.
+3. Browse the list of entries for the selected category.
+4. Select the passage you want and click the insert button. The text is inserted at the current cursor position.
+5. Click **✕** to close the task pane when done.
+
+## Besmellah Page (صفحه بسم الله)
+
+The Besmellah page feature inserts or edits a dedicated opening page featuring the phrase بسم الله الرحمن الرحيم rendered in traditional Arabic calligraphy. This page is standard in Iranian academic theses and dissertations.
+
+Parsanegar bundles four dedicated calligraphic font families for this purpose:
+
+| Font | Identifier |
+|---|---|
+| Besmellah 1 | `Besmellah_1.ttf` |
+| Besmellah 2 | `Besmellah_2.ttf` |
+| Besmellah 3 | `Besmellah_3.ttf` |
+| Besmellah 4 | `Besmellah_4.ttf` |
+
+**To insert or edit the Besmellah page:**
+
+1. In the **پارسانگار** ribbon tab, open the **ابزار** (Tools) gallery and click **صفحه بسم الله**.
+
+   Alternatively, use the keyboard shortcut **Alt + Shift + Z**.
+
+2. The `BesmellahPageForm` dialog opens. Choose your preferred calligraphic style (one of the four Besmellah font variants).
+3. Confirm the selection to insert or update the Besmellah page in the document.
+
+<Note>
+  The Besmellah fonts must be installed on your system for the page to render correctly. Parsanegar installs them automatically during setup and verifies them on every startup via `checkingFonts()`. If the fonts appear as boxes or question marks, reinstall the add-in and restart Word.
+</Note>
+
+## Dedication Page (تقدیم)
+
+The dedication page (صفحه تقدیم) is a standard section in Iranian academic documents where the author dedicates the work to individuals or ideals. Parsanegar provides an `InsertDedicateTaskPane` with a library of pre-written dedication phrases to make this easier.
+
+Dedication phrases are loaded from the bundled `Dedicate.csv` file. You can choose one of these phrases as a starting point or write your own custom text.
+
+**To insert or edit the dedication page:**
+
+1. In the **پارسانگار** ribbon tab, open the **ابزار** (Tools) gallery and click **ویرایش/درج تقدیم**.
+
+   Alternatively, use the keyboard shortcut **Alt + Shift + D**.
+
+2. The InsertDedicate task pane opens docked to the right side of the window.
+3. Browse the pre-written dedication phrases from `Dedicate.csv` and select one, or type a custom dedication in the text area.
+4. Click the insert button. The dedication text is inserted into the `_field_Dedication_Fa` content control in the document's dedication section.
+5. Click **✕** to close the task pane when finished.

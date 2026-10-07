@@ -1,0 +1,83 @@
+---
+title: "Export Your Parsanegar Document to PDF or Word"
+sidebarTitle: "Exporting"
+description: "Export your Parsanegar document to PDF for reviewers, grayscale PDF for printing, or an unlocked Word file for supervisors and university submission."
+---
+
+Parsanegar provides three export formats optimized for the different submission workflows in Iranian academic settings — a reviewer-ready PDF, a grayscale print PDF, and an unlocked Word file. Each format is purpose-built for a specific audience: examiners and journal reviewers, monochrome print shops, or university offices and the IranDoc (ایرانداک) national database.
+
+## Export Options
+
+<CardGroup cols={3}>
+  <Card title="PDF خروجی" icon="file-pdf">
+    The standard submission PDF. Converts your document to the format typically sent to examiners and reviewers. All Parsanegar formatting, Persian fonts, and figure captions are fully embedded. Use this format after finalizing your document.
+  </Card>
+  <Card title="خروجی سیاه و سفید" icon="print">
+    A grayscale PDF in which all figures and shapes throughout the document are converted to black and white. This format is designed specifically for monochrome paper printing and avoids unexpected color shifts on black-and-white printers.
+  </Card>
+  <Card title="Word خروجی" icon="file-word">
+    An unlocked `.docx` file that requires no Parsanegar add-in to open or read. This version is suitable for delivering to your supervisor (استاد راهنما), advisor (استاد مشاور), the university admissions office (دفتر آموزش دانشگاه), and the IranDoc system. Parsanegar features are not available in this exported copy.
+  </Card>
+</CardGroup>
+
+<Warning>
+  The Word export permanently removes all Parsanegar content controls and document variables from the exported copy. You **cannot** re-import an exported Word file back into Parsanegar or recover the original structured document from it. Always keep your original Parsanegar `.docx` file.
+</Warning>
+
+## How to Export
+
+<Tip>
+  Before exporting, click **بروزرسانی سند** (Update Document) to pull the latest metadata and field values from the Parsanegar server. This ensures that all dynamic fields, captions, and cross-references reflect the current saved state of your document.
+</Tip>
+
+<Steps>
+  <Step title="Finalize your document">
+    Complete all writing, run the spelling and grammar checker, and resolve any outstanding comments or tracked changes. Use **بروزرسانی سند** to synchronize all fields and variable values.
+  </Step>
+  <Step title="Open the export gallery">
+    In the Parsanegar ribbon, locate the **گزینه‌های دیگر** group and click the **خروجی** gallery button to expand the list of available export formats.
+  </Step>
+  <Step title="Choose a format">
+    Select one of the three export options — **PDF خروجی**, **خروجی سیاه و سفید**, or **Word خروجی** — depending on who will receive the file and how it will be used.
+  </Step>
+  <Step title="Choose the destination">
+    A standard Save dialog opens. Navigate to the folder where you want to save the exported file, enter a filename, and confirm. Parsanegar will generate the file and notify you when the export is complete.
+  </Step>
+</Steps>
+
+<Note>
+  After a successful Word export, the Microsoft Word title bar displays an **(Exported)** suffix in the application caption. This visual indicator confirms that the currently open document is an exported copy — not your original Parsanegar document — and that add-in features are disabled.
+</Note>
+
+## Cloud Upload
+
+Parsanegar can back up your document to the [shivanegar.ir](http://shivanegar.ir/) server so that your supervisors and collaborators always have access to the latest version.
+
+- **بارگذاری سند** (Upload Document) — click this button in the **مدیریت اسناد** group to POST your document file and metadata to the server (`api/save/parsanegar/1`). A loading indicator is displayed while the upload is in progress, and a confirmation message appears on success.
+- **بروزرسانی سند** (Update Document) — fetches the latest copy of the document and all updated metadata from the server (`api/get-document/{id}`) and merges the changes into your local file.
+
+<Note>
+  If the **AutoSaveOnClose** setting is enabled in Parsanegar preferences, the document is automatically uploaded to the server whenever you close it. This ensures the server always has your latest progress without requiring a manual upload step.
+</Note>
+
+## LaTeX Export
+
+Parsanegar includes an experimental LaTeX export that converts your document into a XeLaTeX-compatible `.tex` source file. The export uses two strategies in sequence:
+
+1. **HTML-to-LaTeX conversion** — Parsanegar first saves the document as filtered HTML, then converts inline formatting tags (`<b>`, `<i>`, `<u>`, `<p>`, etc.) to their corresponding LaTeX macros (`\textbf{}`, `\textit{}`, `\underline{}`, etc.).
+2. **Direct document traversal** — if the HTML export fails, Parsanegar falls back to walking through each paragraph in the document and mapping heading styles to `\section{}`, `\subsection{}`, and `\subsubsection{}` commands.
+
+The generated `.tex` file includes a standard XeLaTeX preamble using the `fontspec` and `polyglossia` packages with Persian language support:
+
+```latex
+\documentclass{article}
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setmainlanguage{english}
+\setotherlanguage{farsi}
+\newfontfamily\persianfont{XB Niloofar}
+```
+
+<Warning>
+  LaTeX export is experimental. Complex layouts, tables, figures, and Parsanegar-specific content controls may not convert correctly. Review and adjust the generated `.tex` file before compiling. Ensure the XB Niloofar font (or another Persian-compatible font) is installed on your system before running XeLaTeX.
+</Warning>

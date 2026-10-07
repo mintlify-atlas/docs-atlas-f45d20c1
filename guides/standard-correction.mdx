@@ -1,0 +1,111 @@
+---
+title: "Standard Text Correction for Persian Academic Writing"
+sidebarTitle: "Standard Correction"
+description: "Apply comprehensive standard corrections to your Persian document with a single click using Parsanegar's Standard Correction feature."
+---
+
+The **Standard Correction** (تصحیح استاندارد / زبان معیار) button applies a bundled set of lexical substitutions to the entire document or the current selection. Where the other Virastar tools handle orthographic mechanics — half-spaces, tanvin marks, punctuation spacing, and spelling — Standard Correction focuses on vocabulary: it replaces foreign loanwords and non-standard Persian terms with the approved equivalents published by the Academy of Persian Language and Literature (فرهنگستان زبان و ادب فارسی). All substitution rules are loaded from the embedded **Standard.csv** rule table, giving academic authors a reliable way to align their writing with current formal Persian standards before submission.
+
+---
+
+## What Standard Correction Fixes
+
+Standard Correction applies every rule defined in the **Standard.csv** data file. The table is structured as a list of find-and-replace pairs, each with optional match-case, whole-word, wildcard, and diacritic-sensitivity flags. Categories of corrections include:
+
+- **Academy-approved vocabulary** — foreign loanwords (commonly from English, French, or Arabic) replaced by their officially adopted Persian equivalents (e.g., replacing informal or transliterated foreign terms with فرهنگستان-approved words).
+- **Formal register conversions** — informal or colloquial Persian word forms converted to their standard written equivalents expected in academic prose.
+- **Common abbreviation and shorthand expansions** — abbreviated or contracted forms written out in full as required by academic style guides.
+- **Non-standard compound word forms** — spacing or attachment errors in compound Persian words corrected to the standard written form.
+
+<Note>
+  Standard Correction targets vocabulary and word forms, not character-level issues. Run it alongside — not instead of — the نیم‌فاصله گذاری, نشانه گذاری, and غلط املایی tools to achieve complete correction of your document.
+</Note>
+
+---
+
+## How to Run Standard Correction
+
+<Steps>
+  <Step title="Save your document first">
+    Press **Ctrl+S** to save a copy of your document before running any bulk correction. Standard Correction modifies text in-place and cannot be reversed except through Word's undo history (**Ctrl+Z**). Saving first gives you a fallback if any substitution produces an unexpected result.
+  </Step>
+  <Step title="Select text (optional)">
+    Highlight the range of text you want to correct. If you want to process the entire document, leave nothing selected and position your cursor anywhere in the main body text.
+  </Step>
+  <Step title="Click زبان معیار">
+    In the **ویراستاری** group on the Parsanegar ribbon tab, click the **زبان معیار** button (or press **Alt+;**). If no selection is active, Parsanegar displays a confirmation dialog asking whether to apply the correction to the full document. Click **بله** to proceed.
+  </Step>
+  <Step title="Wait for the loading indicator">
+    Parsanegar runs the substitution asynchronously and displays a loading indicator. For long documents the process may take several seconds. Do not edit the document until the indicator disappears.
+  </Step>
+  <Step title="Review changes">
+    Scroll through the corrected sections or use Word's revision history to spot-check the substitutions before saving the final version.
+  </Step>
+</Steps>
+
+<Warning>
+  Standard Correction applies all rules globally without a preview step. There is no built-in undo list specific to this operation — the only way to reverse changes is with Word's **Ctrl+Z** undo command, which works only while the document remains open in the same session. Always save before running.
+</Warning>
+
+---
+
+## Customizing Corrections
+
+You can adjust which correction categories are active, and where in the document each correction is applied, through the Virastar Settings panel.
+
+<Steps>
+  <Step title="Open Virastar Settings">
+    Click the **dialog launcher** — the small arrow at the bottom-right corner of the **ویراستاری** group on the Parsanegar tab. The **تنظیمات ویراستاری** panel opens.
+  </Step>
+  <Step title="Configure half-space correction scope">
+    Under the **ویراستار** section, use the three toggle switches to include or exclude footnotes, headers and footers, and special fields (such as text boxes) from half-space correction passes.
+  </Step>
+  <Step title="Configure digit character replacement">
+    Under the **تبدیل عدد** section, toggle **جایگزین کردن کاراکتر عدد** to control whether number conversions replace the underlying Unicode codepoint or only the visual glyph.
+  </Step>
+  <Step title="Close the settings panel">
+    Click the **×** button at the top of the panel. Your settings are saved automatically and take effect immediately for subsequent Virastar operations.
+  </Step>
+</Steps>
+
+The embedded rule tables that back each correction type are:
+
+| Rule file | Correction type | Ribbon button / gallery item |
+|---|---|---|
+| `HalfSpace.csv` | Half-space placement | نیم‌فاصله گذاری |
+| `Standard.csv` | Academy-approved vocabulary | زبان معیار (تصحیح استاندارد) |
+| `Tanvin.csv` | Tanvin marks | نشانه گذاری (سجاوندی) |
+| `Signs.csv` | Punctuation and whitespace | نشانه گذاری (سجاوندی) |
+| `Tashdid.csv` | Tashdid (shadda) marks | Applied during half-space and punctuation passes |
+| `SpellingCorrection.csv` | Spelling mistakes | غلط املایی |
+
+---
+
+## Recommended Order of Operations
+
+Running the Virastar tools in a consistent order helps avoid one pass undoing the work of another and ensures the cleanest final output.
+
+<Steps>
+  <Step title="Run Standard Correction (زبان معیار)">
+    Replace non-standard vocabulary first so that subsequent spelling and half-space passes operate on the correct word forms.
+  </Step>
+  <Step title="Run Auto Half-Spacing (نیم‌فاصله گذاری)">
+    After vocabulary is standardized, insert correct half-spaces between verb prefixes, suffixes, and other grammatical attachments.
+  </Step>
+  <Step title="Run Punctuation Correction (نشانه گذاری سجاوندی)">
+    Correct tanvin marks and normalize whitespace around punctuation.
+  </Step>
+  <Step title="Run Spelling Correction (غلط املایی)">
+    Apply remaining character-level spelling fixes.
+  </Step>
+  <Step title="Run Number Conversion (تبدیل اعداد)">
+    Convert all digits to their required system (Persian or English) as a final pass, after all text content is finalized.
+  </Step>
+  <Step title="Save and export">
+    Save the document with **Ctrl+S**, then use Parsanegar's export tools to generate your PDF, grayscale, or identification copy.
+  </Step>
+</Steps>
+
+<Tip>
+  If you are unsure whether a particular substitution is correct for your field, run Standard Correction on a selected paragraph first before applying it to the whole document. This lets you preview the effect of the Academy vocabulary rules on a small sample before committing to a full-document pass.
+</Tip>

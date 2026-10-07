@@ -1,0 +1,92 @@
+---
+title: "Convert Numbers Between Persian and English in Parsanegar"
+sidebarTitle: "Number Conversion"
+description: "Convert Arabic-Indic (Persian) digits to ASCII digits and vice versa throughout your document or selected text using Parsanegar's number conversion tool."
+---
+
+Persian academic documents require consistent use of Persian (Arabic-Indic) digits (۰۱۲۳۴۵۶۷۸۹) in all Persian-language body text, while some elements — such as English-language captions, international references, or bilingual tables — may legitimately call for ASCII digits (0123456789). Parsanegar's **تبدیل اعداد** (number conversion) tool converts between these two digit systems in a single pass, operating on your current selection or the entire document, and correctly handles decimal numbers as well as integer sequences.
+
+## Reference: Persian and English Digit Equivalents
+
+| ASCII (English) | Persian (Arabic-Indic) |
+|:---:|:---:|
+| 0 | ۰ |
+| 1 | ۱ |
+| 2 | ۲ |
+| 3 | ۳ |
+| 4 | ۴ |
+| 5 | ۵ |
+| 6 | ۶ |
+| 7 | ۷ |
+| 8 | ۸ |
+| 9 | ۹ |
+
+Although the two digit sets look visually similar, they occupy entirely different Unicode codepoints. A document that mixes them will appear inconsistent and may cause problems in indexing, sorting, or automated processing.
+
+---
+
+## Converting Numbers to Persian (به فارسی)
+
+Use this option to replace all ASCII digits in your text with their Persian Arabic-Indic equivalents.
+
+<Steps>
+  <Step title="Select text (optional)">
+    Highlight the range of text whose digits you want to convert. If you want to process the entire document, place your cursor anywhere without making a selection.
+  </Step>
+  <Step title="Open the number conversion gallery">
+    In the **ویراستاری** group on the Parsanegar ribbon tab, click the **تبدیل اعداد** gallery button.
+  </Step>
+  <Step title="Choose به فارسی">
+    Click **به فارسی** in the gallery (or press **Alt+/**). Every ASCII digit (0–9) in the target range is immediately replaced with its Persian equivalent (۰–۹).
+  </Step>
+</Steps>
+
+<Note>
+  If no text is selected when you trigger the conversion, Parsanegar applies it to the entire document content. If the cursor is inside a footer or header when you click, Parsanegar may scope the operation to that story type automatically. For full-document conversion, click in the main body text before running the command.
+</Note>
+
+---
+
+## Converting Numbers to English (به انگلیسی)
+
+Use this option to replace all Persian digits with their ASCII equivalents — for example, when preparing an English-language abstract or an appendix that must use Western numerals.
+
+<Steps>
+  <Step title="Select text (optional)">
+    Highlight the range of text whose digits you want to convert. Leave nothing selected to apply to the full document.
+  </Step>
+  <Step title="Open the number conversion gallery">
+    In the **ویراستاری** group on the Parsanegar tab, click the **تبدیل اعداد** gallery button.
+  </Step>
+  <Step title="Choose به انگلیسی">
+    Click **به انگلیسی** (or press **Alt+.**). Every Persian digit (۰–۹) in the target range is replaced with its ASCII equivalent (0–9).
+  </Step>
+</Steps>
+
+---
+
+## Scope of Conversion
+
+The conversion scope follows this logic:
+
+- **Text is selected** — only the selected range is affected. This is the safest option when different sections of your document require different digit styles.
+- **No text is selected** — Parsanegar detects that the selection contains no digits and expands the scope. In the main body text story, this applies to the entire document content. In a footer or header story, it applies to that story only.
+
+<Note>
+  Page numbers and automatic caption counters inserted by Parsanegar's template are managed by Word's field codes and are not plain text digits. They will not be affected by the **تبدیل اعداد** command. Update those elements through the Parsanegar caption and page-numbering tools instead.
+</Note>
+
+---
+
+## Digit Character Replacement Option
+
+By default, Parsanegar also replaces the underlying Unicode character when converting (not merely the visual appearance). You can verify or change this behavior in the Virastar Settings panel:
+
+1. Click the **dialog launcher** (small arrow) at the bottom-right of the **ویراستاری** group.
+2. Under the **تبدیل عدد** section, toggle **جایگزین کردن کاراکتر عدد** on or off.
+
+When this setting is on, the digit `1` (U+0031) and the digit `۱` (U+06F1) are treated as distinct characters with different Unicode codepoints and are converted accordingly. This is the recommended setting for academic documents.
+
+<Tip>
+  Run number conversion as one of the final steps before exporting your document. By waiting until all text editing is complete, you avoid accidentally introducing mixed digit styles through later revisions. A quick conversion pass immediately before export guarantees a uniform digit style throughout the entire submission.
+</Tip>

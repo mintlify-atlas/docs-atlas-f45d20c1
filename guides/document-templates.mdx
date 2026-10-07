@@ -1,0 +1,102 @@
+---
+title: "University Document Templates in Parsanegar"
+sidebarTitle: "Templates"
+description: "Explore the pre-built university document templates available in Parsanegar for thesis, dissertation, and project documents at Iranian universities."
+---
+
+Every academic institution imposes its own formatting standards on theses, dissertations, and research projects — margin sizes, header styles, page-numbering schemes, section order, and cover-page layouts all vary. Parsanegar ships with a library of university-specific templates that encode these requirements directly into the document structure, so students and researchers always start with a correctly formatted file and never need to configure page layout manually. When you create a new document, Parsanegar selects the right template package based on the university and document type you choose.
+
+## Template Types
+
+Parsanegar organizes templates into three named types, controlled by the `TemplateTypes` enum in the add-in assembly:
+
+| Enum value | Integer | Persian label | Description |
+|---|---|---|---|
+| `UniversityTemplate` | 1 | قالب دانشگاهی | Official formatting issued by a specific university. Covers page layout, typography, section order, and header/footer rules. |
+| `StudentTemplate` | 2 | قالب دانش‌آموزی | A student-configurable layout. Currently in development; will be available in a future release. |
+| `OfficeTemplate` | 3 | قالب گزارش اداری | A general office-report format. Currently in development; will be available in a future release. |
+
+In addition, two special built-in template variants are used internally:
+
+| Enum value | Integer | Description |
+|---|---|---|
+| `ParsaTemplate` | -2 | The Parsa template conforming to the Ministry of Science, Research and Technology (وزارت علوم) standard |
+| `ShivaNegarTemplate` | -3 | The default Parsanegar template, shared across universities |
+
+When you select **قالب دانشگاهی** during document creation, the wizard loads the template files bundled for the chosen university.
+
+## Supported Universities
+
+Parsanegar currently includes pre-built template packages for the following four universities. Each package ships as a Word template file (`.dotm`) together with a full set of section sub-templates (`.docx` files).
+
+<CardGroup cols={2}>
+  <Card title="Yazd University" icon="building-columns">
+    **دانشگاه یزد**
+
+    `YazdUniversity` (enum value 0). Full template set including Persian and English identity pages, defense-meeting record, legal-rights declaration, research-ethics statement, dedication, acknowledgment, abstract, table of contents, figures list, tables list, abbreviations, preface, up to 10 chapters, appendices, endnotes, glossary, sources, English abstract, and English identity page.
+  </Card>
+
+  <Card title="Islamic Azad University — Yazd Branch" icon="building-columns">
+    **دانشگاه آزاد اسلامی واحد یزد**
+
+    `AzadUniversityYazd` (enum value 1). Template set covers Besmellah page, Persian identity, defense-meeting record, originality commitment, research-ethics statement, evaluation form, acknowledgment, dedication, table of contents, tables list, figures list, maps list, abbreviations, Persian abstract, up to 10 chapters, sources, appendices, English abstract, and English identity page. Includes MSc and PhD proposal templates.
+  </Card>
+
+  <Card title="Islamic Azad University — Central Branch" icon="building-columns">
+    **دانشگاه آزاد اسلامی واحد مرکزی**
+
+    `AzadUniversityCentral` (enum value 2). Template set covers Persian identity, Besmellah, research-ethics statement, originality commitment, acknowledgment, dedication, evaluation form, Form B, table of contents, figures list, tables list, maps list, Persian abstract, up to 10 chapters, sources, appendices, English abstract, and English identity page. Includes MSc and PhD proposal templates in Persian and English variants.
+  </Card>
+
+  <Card title="Iran University of Science and Technology" icon="building-columns">
+    **دانشگاه علم و صنعت ایران**
+
+    `ScienceAndTechnologyUni` (enum value 3). Template set covers Persian identity, Besmellah, defense-meeting record, legal-rights declaration, research-ethics statement, dedication, acknowledgment, Persian abstract, preface, table of contents, figures list, tables list, abbreviations, up to 10 chapters, appendices, endnotes, glossary, sources, English abstract, and English identity page.
+  </Card>
+</CardGroup>
+
+<Note>
+  Support for additional universities can be requested through the Parsanegar support channel. Each new university requires a custom template package that matches the institution's official formatting guidelines.
+</Note>
+
+## Template Structure
+
+Each university template package is composed of an ordered collection of **sub-templates** — individual `.docx` files, one for each document section. When Parsanegar assembles a new document, it iterates through these sub-templates in their defined order, copies each one into a new Word document separated by a content-controlled section break, and populates the shared content controls (title, author, supervisor, university icon, and so on) across all sections at once.
+
+The sub-templates follow a consistent naming convention (`<order>_<section>.docx`) so their sequence is always deterministic. The full section list across all supported universities includes:
+
+| Section file | Section name |
+|---|---|
+| `1_PersianIdentity.docx` | Persian cover / identity page (صفحه شناسنامه فارسی) |
+| `2_InTheNameOfAllah.docx` | Besmellah page (بسم‌الله) |
+| `3_DefenseMeeting.docx` | Defense meeting record (صورت‌جلسه دفاع) |
+| `4_LegalRights.docx` | Legal rights declaration (حقوق قانونی) |
+| `5_ResearchEthics.docx` | Research ethics statement (اخلاق پژوهش) |
+| `6_Dedication.docx` | Dedication (تقدیم) |
+| `7_Acknowledgment.docx` | Acknowledgment (تشکر و قدردانی) |
+| `8_PersianAbstract.docx` | Persian abstract (چکیده فارسی) |
+| `9_Preface.docx` | Preface (پیشگفتار) |
+| `10_TableOfContents.docx` | Table of contents (فهرست مطالب) |
+| `11_TableOfFigures.docx` | List of figures (فهرست شکل‌ها) |
+| `12_TableOfTables.docx` | List of tables (فهرست جداول) |
+| `13_Abbreviations.docx` | Abbreviations (فهرست اختصارات) |
+| `14_Chapter1.docx` … `14_Chapter10.docx` | Chapters 1–10 (فصل‌ها) |
+| `15_Appendices.docx` | Appendices (پیوست‌ها) |
+| `16_Endnotes.docx` | Endnotes (پی‌نوشت‌ها) |
+| `17_Glossary.docx` | Glossary (واژه‌نامه) |
+| `18_Sources.docx` | References / sources (منابع) |
+| `19_EnglishAbstract.docx` | English abstract |
+| `20_EnglishIdentity.docx` | English cover / identity page |
+
+The exact sections included — and which are **required** versus **optional** — vary by university and document type. For example, the evaluation form (`EvaluationForm`) and originality-commitment page (`OriginalityCommitment`) appear in the Azad University packages but not in Yazd University. The template manifest (`Templates.xml`) encodes per-document-type exclusion lists (`notIncludeSubTemplates`) and required-section lists (`requiredSubTemplates`) so the add-in can correctly filter sections when the user selects a specific document type.
+
+Each `.dotm` word template file bundled with the package also carries the correct paragraph styles, page margins, header/footer definitions, and typography settings for that university, ensuring the assembled document conforms to institutional standards immediately upon creation.
+
+## Selecting a Template During Document Creation
+
+Template selection happens in **Step 2** of the new-document wizard:
+
+1. Open **ایجاد سند جدید** from the ribbon gallery.
+2. In the *Template Type* dropdown (`comboTemplateType`), choose **قالب دانشگاهی** for a university-backed template.
+3. Advance to **Step 3** and select your university from `comboUniversity`. Parsanegar loads the correct template package for that university automatically.
+4. Complete the remaining wizard steps; when you reach Step 6, Parsanegar copies the `.dotm` template to `%AppData%\Microsoft\Templates\ShivaNegarTemplates\`, creates the document from it, and then inserts the ordered sub-templates to build the full document structure.

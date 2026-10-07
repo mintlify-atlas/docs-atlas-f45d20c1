@@ -1,0 +1,85 @@
+---
+title: "Configure Parsanegar Add-in Settings"
+sidebarTitle: "Settings"
+description: "Manage workspace directory, auto-save, login preferences, and other Parsanegar settings from the Document Manager settings panel."
+---
+
+The Parsanegar (پارسانگار) settings panel controls where your documents are stored, how sessions are remembered between Word restarts, and whether documents are automatically uploaded when closed. All settings are persisted in the add-in's application settings store and take effect immediately after being changed.
+
+## Accessing Settings
+
+Settings are located inside the **Document Manager** window.
+
+1. In the **پارسانگار** ribbon tab, click the **مدیریت اسناد** (Document Manager) button to open the manager form.
+2. Inside the Document Manager, navigate to the **تنظیمات** (Settings) view using the left-side navigation.
+
+The Settings view displays the current workspace directory path and provides toggle controls for all configurable options.
+
+## Workspace Directory
+
+The workspace directory is the root folder where Parsanegar looks for and stores all managed documents. The default path is:
+
+```
+Documents\ShivaNegarWorkspace
+```
+
+This corresponds to the `WorkSpaceDirectory` setting (`StringConstant.DefaultWorkspaceName = "ShivaNegarWorkspace"`). To change it:
+
+1. Open the Settings view in the Document Manager.
+2. Click **تغییر پوشه محیط کاری** (Change Workspace Folder). A folder browser dialog opens, pre-populated with the current path.
+3. Select a new folder and click **OK**. The new path is saved immediately.
+
+Parsanegar checks whether an open document resides within the workspace directory to determine whether to enable ribbon controls. Documents located outside this folder will have most add-in features disabled.
+
+<Note>
+  If you change the workspace directory, physically move any existing managed documents to the new folder as well. Documents left in the old location will no longer be recognized by Parsanegar and their ribbon controls will be grayed out until they are moved.
+</Note>
+
+## Auto-Save on Close
+
+When **Auto-Save on Close** (`AutoSaveOnClose`) is enabled, Parsanegar automatically uploads the current document to the server whenever you close it in Microsoft Word.
+
+This feature is controlled by the `Properties.Settings.Default.AutoSaveOnClose` setting. The upload is triggered during Word's `DocumentBeforeClose` event, and only runs when the document is a valid managed Parsanegar document.
+
+<Tip>
+  Enable Auto-Save on Close as a safety net against accidental data loss. Your document will always have a server-side backup after each Word session, even if you forget to upload manually.
+</Tip>
+
+## Remember Me
+
+The **Remember Me** setting (`RememberUser`) controls whether your login session is preserved when Microsoft Word is shut down.
+
+- **Enabled (default):** Your `UserToken` and `Mobile` number are retained in the application settings across Word restarts. You will not need to log in again the next time you open Word.
+- **Disabled:** During the Word `Shutdown` event, both `UserToken` and `Mobile` are cleared from settings (`Properties.Settings.Default.UserToken = ""`). You will be required to log in again at the start of every Word session.
+
+To toggle this setting, use the switch in the Settings view of the Document Manager.
+
+## Font Check on Startup
+
+Every time a Parsanegar-managed document is opened, the add-in runs `checkingFonts()` to verify that all required Persian fonts are installed on the system. If any fonts are missing, a dialog asks whether you want to install them. Accepting will install the missing fonts from the bundled resources; a Word restart is required for the fonts to take effect.
+
+The following fonts are checked and bundled with the installer:
+
+| Font Family | Variants |
+|---|---|
+| B Nazanin | Regular, Bold |
+| B Zar | Regular, Bold |
+| B Lotus | Regular, Bold |
+| B Yagut | Regular, Bold |
+| B Badr | Regular, Bold |
+| B Titr | Bold |
+| IranNastaliq | Regular |
+| Vazirmatn | Regular, Bold |
+| Besmellah | Besmellah 1, 2, 3, 4 |
+| Times New Roman | Regular, Bold, Italic, Bold Italic |
+
+If fonts are still missing after reinstalling, close Microsoft Word completely and reopen it to allow the font system to refresh.
+
+## Persian Keyboard Layout Check
+
+On every startup (when a valid Parsanegar document is opened), the add-in calls `checkPersianKeyboardLayout()` to verify that the Persian keyboard input language is installed on Windows.
+
+- If the Persian layout **is installed**, the add-in automatically switches the active input language to Persian.
+- If the Persian layout **is not installed**, a warning dialog is shown and the Windows language settings page is opened automatically (Settings → Time & Language → Language for Windows 10/11, or Regional and Language Options for Windows 7/8).
+
+If the automatic switch fails, you can switch to the Persian keyboard manually using the Windows language bar in the taskbar notification area.
