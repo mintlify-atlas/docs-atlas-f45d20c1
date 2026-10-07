@@ -12,7 +12,7 @@ Parsanegar includes a collaboration layer built on the [shivanegar.ir](http://sh
 
 ## Opening the Chat Panel
 
-Click the **گفتگو** button (linked to `btnChatBoxNetworking`) in the **مدیریت اسناد** group on the Parsanegar ribbon. The **ChatBox** task pane slides open on the right side of the Word window.
+Click the **تبادل نظر** button (linked to `btnChatBoxNetworking`) in the **پارسانگار** group on the Parsanegar ribbon. The **ChatBox** task pane slides open on the right side of the Word window.
 
 When the panel opens, Parsanegar reads the server document ID stored in your document and automatically retrieves the message history for that document from the server (`GET api/messages/{id}`). Messages are displayed in a scrollable list, and the panel scrolls to the most recent message automatically.
 
@@ -58,15 +58,13 @@ To invite a collaborator to your document, open the **Networking Manager** from 
 
 ## Viewing Shared Documents
 
-When another user shares a document with you, it appears in your Document Manager. Parsanegar retrieves incoming share invitations from the server (`GET api/shares/{id}`) and lists them with their current status.
-
-To accept a share, open the Document Manager. Pending invitations are shown alongside active collaborations. Accepting or declining a share sends a status update to the server (`POST api/share-accept`) with the share ID and the accepted/declined status value.
+When another user shares a document with you, it appears in your Document Manager. To accept or decline a pending invitation, open the Document Manager. Parsanegar sends a status update to the server (`POST api/share-accept`) with the share ID and the accepted or declined status value.
 
 Once a share is accepted, the shared document appears in your document list and you can open the chat panel to begin communicating with the document author.
 
 ## Networking Manager
 
-The **Networking Manager** (`NetworkingManagerControl`) provides a full view of all active collaborators on your document. For each accepted collaborator it shows:
+The **Networking Manager** (`NetworkingManagerControl`) provides a full view of all active collaborators on your document. When it opens, Parsanegar fetches the current collaborator list from the server (`GET api/shares/{id}`), filtering to only those with an accepted status. For each accepted collaborator it shows:
 
 - Full name and mobile number
 - Assigned role (e.g., استاد راهنما اول)

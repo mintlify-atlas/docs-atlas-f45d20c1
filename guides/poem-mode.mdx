@@ -1,5 +1,5 @@
 ---
-title: "Format Persian Poetry in Parsanegar Documents"
+title: "Format Persian Poetry with Poem Mode in Parsanegar"
 sidebarTitle: "Poem Mode"
 description: "Use Parsanegar's poem mode to format Persian poetry in your academic document, with support for single-column and two-column (hemistich) layouts."
 ---
@@ -66,12 +66,12 @@ The table borders are hidden so the poem appears as a natural two-column block o
 
 ## Poem Type Setting
 
-The underlying implementation (`PoemTypes` enum in `Constants.cs`) supports two technical approaches for each visual layout:
+The `PoemTypes` enum in `Constants.cs` defines two layout implementations that map directly to the two gallery options:
 
-- `CreatePoemUsingTextColumns` — uses Word's section-level text columns and manual line breaks
-- `CreatePoemUsingTable` — uses a hidden Word table
+- `CreatePoemUsingTextColumns` — used by **PoemMode1 (تک ستونه)**; formats each verse using Word's text-column layout and manual line breaks.
+- `CreatePoemUsingTable` — used by **PoemMode2 (دو ستونه)**; places each hemistich pair into a hidden two-column Word table.
 
-The active approach is controlled by the **VirastarSettings_CreatePoemType** application setting. The ribbon gallery buttons (`PoemMode1` / `PoemMode2`) always produce the visually correct single-column or two-column result regardless of which implementation is active — the implementation choice affects only internal document structure, not the visual output.
+Each gallery button is permanently bound to its corresponding implementation. Selecting **تک ستونه** always invokes `CreatePoemUsingTextColumns`, and selecting **دو ستونه** always invokes `CreatePoemUsingTable`.
 
 ## Islamic Content Insertion
 

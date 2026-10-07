@@ -1,7 +1,7 @@
 ---
-title: "Create and Manage Academic Documents in Parsanegar"
+title: "Creating and Managing Academic Documents in Parsanegar"
 sidebarTitle: "Creating Documents"
-description: "Learn how to create, open, archive, and manage Persian academic documents using the Parsanegar Document Manager in Microsoft Word."
+description: "Learn how to create, open, archive, and manage Persian academic documents using the Parsanegar Document Manager panel in Microsoft Word."
 ---
 
 The Document Manager (مدیریت اسناد) is the central hub of Parsanegar. From it you can create new academic documents using a guided wizard, open existing documents stored in your local workspace, archive completed work, search across all your documents, and keep everything synchronized with the Parsanegar cloud server. All documents are saved as `.docx` files in a dedicated workspace folder on your machine and are also registered on the server so you can access them from any device.
@@ -47,8 +47,8 @@ Parsanegar creates academic documents through a six-step wizard. Click **ایج�
     | Value | Persian label | Description |
     |---|---|---|
     | `UniversityTemplate` (1) | قالب دانشگاهی | Official university-issued formatting |
-    | `StudentTemplate` (2) | قالب دانش‌آموزی | Student-configured layout *(coming soon)* |
-    | `OfficeTemplate` (3) | قالب گزارش اداری | General office report format *(coming soon)* |
+    | `StudentTemplate` (2) | قالب دانش‌آموزی | Student-configured layout; not yet selectable in the wizard |
+    | `OfficeTemplate` (3) | قالب گزارش اداری | General office report format; not yet selectable in the wizard |
     | `Nothing` (-1) | صفحه خالی | Blank document with no pre-built sections |
 
     Finally, enter a **document name**. The name must be unique within your workspace — Parsanegar checks the server to prevent duplicates and validates that the name contains no reserved characters. Your package entitlement is also verified at this step; an invalid or expired package will block document creation.
@@ -118,17 +118,17 @@ When a document is no longer actively being edited but you want to keep it acces
 
 After a document has been created, you can update its metadata (title, author, supervisor, university, abstract, keywords, and more) without recreating it from scratch.
 
-Open the target document in Word and click **ویرایش محتوا** (`btnChangeContents`) in the Parsanegar ribbon, or press **Alt + F2**. The Edit Contents panel loads the current values from the server and populates each field for review. Change any fields and click **Confirm**. The add-in:
+Open the target document in Word and click **ویرایش اطلاعات** (`btnChangeContents`) in the Parsanegar ribbon, or press **Alt + F2**. The Edit Contents panel loads the current values from the server and populates each field for review. Change any fields and click **Confirm**. The add-in:
 
 1. Updates every matching content control in the document
 2. Saves the changes to the Word document's variables
 3. Syncs the updated configuration to the Parsanegar server
 
-## Cloud Sync
+## Document Sync and Updates
 
-Parsanegar keeps your documents synchronized between your local machine and the server.
+Parsanegar provides two separate actions for keeping your document current.
 
-- **Upload** — click `btnUploadDocument` in the ribbon (or press **Alt + U**) to push the current version of the open document to the server.
-- **Update** — click `btnUpdateDocument` in the ribbon (or press **Alt + R**) to pull the latest version from the server and apply any server-side updates to the local file.
+- **همرسانی سند** (`btnUploadDocument`, **Alt + U**) — uploads the current version of the open document to the Parsanegar cloud server. On the first use, it creates a new cloud backup; on subsequent uses, it syncs the local changes to the existing server copy.
+- **بروزرسانی سند** (`btnUpdateDocument`, **Alt + R**) — refreshes all auto-generated content within the document: table of contents, list of figures, list of tables, cross-references, and bibliography entries. This is a local operation and does not contact the server.
 
 Both operations work on the currently active Parsanegar document in Word.

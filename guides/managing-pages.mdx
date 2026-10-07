@@ -1,7 +1,7 @@
 ---
 title: "Add, Remove, and Reorder Pages in a Parsanegar Document"
 sidebarTitle: "Managing Pages"
-description: "Control the structure of your Parsanegar document by adding, removing, and configuring sections using the page management panel."
+description: "Control the structure of your Parsanegar document by adding, removing, and configuring optional sections and chapters using the page management panel."
 ---
 
 Parsanegar documents are not flat Word files — they are composed of a series of content-controlled sections, one for each document part (cover page, abstract, chapters, sources, and so on). This structure guarantees that every section uses the correct page layout, header/footer, and numbering style defined by the university template. The **Add/Remove Pages** panel lets you change the section composition of an already-created document: enabling optional sections you skipped during creation, removing sections that are not relevant to your work, and adjusting the number of chapters.
@@ -53,8 +53,8 @@ Removing an optional page deletes all Word sections occupied by that page (a sin
 
 Chapters are treated separately from other optional sections because multiple chapters of the same type can exist in a single document. The panel provides two buttons:
 
-- **افزودن فصل** (`btnAddChapter`) — adds the next available chapter (Chapter 2, Chapter 3, …) up to a maximum of 10 chapters (indices 0–9).
-- **حذف فصل** (`btnRemoveChapter`) — removes the most recently added chapter. The button is disabled when only one chapter remains; the Add button is disabled when 10 chapters are present.
+- **`btnAddChapter`** (plus icon, tooltip: "اضافه کردن فصل") — adds the next available chapter (Chapter 2, Chapter 3, …) up to a maximum of 10 chapters. The button is disabled once 10 chapters are present.
+- **`btnRemoveChapter`** (minus icon, tooltip: "حذف کردن فصل") — removes the most recently added chapter. The button is disabled when only one chapter remains.
 
 Each chapter card in the panel shows whether the chapter has already been created in the document (marked **ساخته شده**) or is new (marked **جدید**).
 
@@ -74,7 +74,7 @@ Each chapter card in the panel shows whether the chapter has already been create
     Use the toggle switches next to each optional section to enable or disable it. Use the **+** and **−** buttons to add or remove chapters. Required pages show a disabled toggle with a tooltip explaining they cannot be changed.
   </Step>
 
-  <Step title="Click 'تأیید تغییرات' (Confirm Changes)">
+  <Step title="Click 'اعمال تغییرات' (Apply Changes)">
     Parsanegar processes each changed section in order: insertions are performed before deletions, and chapters are adjusted last. A loading indicator shows the name of the section currently being processed.
 
     After all structural changes are applied, Parsanegar re-populates the metadata content controls across the entire document (title, author, supervisor, university, etc.) to ensure any newly inserted sections are correctly filled in. It also reattaches the university `.dotm` template to refresh paragraph styles and page layout across all sections.

@@ -1,5 +1,5 @@
 ---
-title: "Text Formatting Settings in Parsanegar Documents"
+title: "Configure Text Formatting and Font Settings in Parsanegar"
 sidebarTitle: "Text Formatting"
 description: "Configure font, paragraph spacing, and alignment settings for Persian academic documents in Parsanegar using the Format Settings dialog."
 ---
@@ -25,7 +25,7 @@ Parsanegar bundles the following fonts and installs them when the add-in loads, 
 
 <CardGroup cols={2}>
   <Card title="Persian Fonts" icon="font">
-    B Yagut, B Badr, B Lotus, B Nazanin, B Titr, B Zar, IranNastaliq, Vazir, Vazirmatn
+    B Yagut, B Yagut Bold, B Badr, B Badr Bold, B Lotus, B Lotus Bold, B Nazanin, B Nazanin Bold, B Titr Bold, B Zar, B Zar Bold, IranNastaliq, Vazir, Vazirmatn Regular, Vazirmatn Bold
   </Card>
   <Card title="Decorative & Latin Fonts" icon="a">
     Besmellah 1–4, Times New Roman (Regular, Bold, Italic, Bold-Italic)
@@ -45,7 +45,7 @@ The Format Settings dialog exposes three spacing fields for each style:
 | **فاصله قبل** | Space before the paragraph in points |
 | **فاصله بعد** | Space after the paragraph in points |
 
-When you select a style from the **عنوان بندی** dropdown, Parsanegar reads the current values from the Word style and pre-fills all fields so you can see the existing settings before making changes. Clicking **اعمال** writes the new values back to the style definition using `style.ParagraphFormat.LineSpacing` and `style.ParagraphFormat.SpaceBefore / SpaceAfter`.
+When you select a style from the **عنوان بندی** dropdown, Parsanegar reads the current values from the Word style and pre-fills all fields so you can see the existing settings before making changes. The dropdown includes: عنوان سطح 1–5 (Heading 1–5), متن سند (Normal), عنوان شکل (Caption), and عنوان جدول (Table Heading). Clicking **اعمال** writes the new values back to the style definition using `style.ParagraphFormat.LineSpacing` and `style.ParagraphFormat.SpaceBefore / SpaceAfter`.
 
 ## Text Direction
 
